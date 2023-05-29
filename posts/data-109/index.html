@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Walter R. Paixão-Côrtes">
+<meta name="dcterms.date" content="2023-02-10">
+<meta name="description" content="Utilizando o Gráfico mais Polêmico da Área de Visualização de Dados">
+
+<title>WVCode - Educação e Consultoria - [VDP] Aula 09 - Seaborn - Tudo acaba em Pizza</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background-image: url(../../library/bars/bar_002_code.jpg);
+background-size: cover;
+      }
+</style>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../library/logos/logo_000_wvcode.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">WVCode - Educação e Consultoria</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/wvcode" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">[VDP] Aula 09 - Seaborn - Tudo acaba em Pizza</h1>
+                  <div>
+        <div class="description">
+          Utilizando o Gráfico mais Polêmico da Área de Visualização de Dados
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Visualização</div>
+                <div class="quarto-category">Python</div>
+                <div class="quarto-category">Pandas</div>
+                <div class="quarto-category">MatPlotLib</div>
+                <div class="quarto-category">Gráfico de Pizza</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Walter R. Paixão-Côrtes </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 10, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#definindo-gráfico-de-pizza-ou-será-torta" id="toc-definindo-gráfico-de-pizza-ou-será-torta" class="nav-link" data-scroll-target="#definindo-gráfico-de-pizza-ou-será-torta">Definindo Gráfico de Pizza… ou será Torta?</a>
+  <ul class="collapse">
+  <li><a href="#exemplo" id="toc-exemplo" class="nav-link" data-scroll-target="#exemplo">Exemplo</a></li>
+  <li><a href="#características-de-uma-boa-pizza-gráfico-de-pizza" id="toc-características-de-uma-boa-pizza-gráfico-de-pizza" class="nav-link" data-scroll-target="#características-de-uma-boa-pizza-gráfico-de-pizza">Características de uma boa Pizza (Gráfico de Pizza)</a></li>
+  </ul></li>
+  <li><a href="#utilização-básica" id="toc-utilização-básica" class="nav-link" data-scroll-target="#utilização-básica">Utilização básica</a>
+  <ul class="collapse">
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  <li><a href="#navegação" id="toc-navegação" class="nav-link" data-scroll-target="#navegação">Navegação</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Olá Cientista de Dados!</p>
+<p>Dentro da área de Visualização de Dados existe uma grande polêmica em relação a um tipo de gráfico: o gráfico de pizza ou torta. E a polêmica não é quanto ao nome, mas a quando devemos utilizar este tipo de gráfico.</p>
+<p>Nesta aula, iremos aprender um pouco sobre essa polêmica e depois, vamos ver como podemos criar este gráfico usando as bibliotecas python seaborn, matplotlib e pandas!</p>
+</section>
+<section id="definindo-gráfico-de-pizza-ou-será-torta" class="level2">
+<h2 class="anchored" data-anchor-id="definindo-gráfico-de-pizza-ou-será-torta">Definindo Gráfico de Pizza… ou será Torta?</h2>
+<p>O gráfico de pizza (ou torta) é um gráfico que tem por objetivo representar as categorias ou dimensões como parte de um todo.</p>
+<section id="exemplo" class="level3">
+<h3 class="anchored" data-anchor-id="exemplo">Exemplo</h3>
+<p>Considere o seguinte cenário: você realizou uma votação sobre qual sabor de pizza é o mais popular. Essa votação foi feita junto aos clientes da pizzaria onde você trabalha, durante o curso de 1 semana. Hoje haverá uma reunião com o dono da pizzaria, onde vocês discutirão quais são os sabores que entrarão na próxima grande promoção da loja. Para isso, você vai apresentar os resultados da votação. E (piada interna) você decidiu que nada melhor que usar um gráfico de pizza para esta tarefa!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pizza.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Um gráfico de pizza!</figcaption>
+</figure>
+</div>
+<p>Como vocês podem ver pela deliciosa imagem acima, o gráfico de pizza é composto por um círculo, que irá representar a totalidade dos votos que foram coletados. Então, cada sabor que foi votado irá representar uma fatia desta pizza. Se olharmos os valores representados no gráfico (que são porcentagens), conseguimos ter uma idéia do quanto cada fatia representa em relação ao todo.</p>
+<p>E, olhando essa imagem, você pode se perguntar: está tudo tão claro, onde está a polêmica? Para isso, vamos ver outra imagem:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="badpizza001.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Exemplo de Gráfico Ruim</figcaption>
+</figure>
+</div>
+<p>Esse gráfico, que visa demonstrar os tweeters mais ativos, representa o principal problema dos gráficos de pizza: quanto mais categorias você tem, menos cada uma representa do todo, deixando mais díficil para o público entender essa representação. A próxima imagem ilustra o outro problema que geralmente encontramos em gráficos de pizza:</p>
+<p><img src="badpizza002.jpg" class="img-fluid"></p>
+<p>Por algum motivo estranho, gráficos de pizza também tem uma perspectiva diferente. E essa mudança de perspectiva torna ainda pior a capacidade do público de perceber a diferença entre cada ‘fatia’.</p>
+</section>
+<section id="características-de-uma-boa-pizza-gráfico-de-pizza" class="level3">
+<h3 class="anchored" data-anchor-id="características-de-uma-boa-pizza-gráfico-de-pizza">Características de uma boa Pizza (Gráfico de Pizza)</h3>
+<p>Então, devemos usar gráficos de pizza ou não? A resposta mais simples é - depende. Baseado em inúmeros especialistas da área de visualização, você pode usar gráficos de pizza quando tem poucas categorias para serem representados. Outra recomendação é evitar mostrar o gráfico em perspectiva, além de utilizar rótulos informativos e bem simples para cada fatia.</p>
+<p>Então, antes de ver como montar esse tipo de gráfico, vamos ficar com uma imagem que reforça o aprendizado até aqui:</p>
+<p><img src="goodpie-badpie.png" class="img-fluid"></p>
+</section>
+</section>
+<section id="utilização-básica" class="level2">
+<h2 class="anchored" data-anchor-id="utilização-básica">Utilização básica</h2>
+<p>Para criar o gráfico de pizza teremos que abandonar um pouco o seaborn, e nos concentrarmos em utilizar apenas o matplotlib. Já estamos usando parte do matplotlib para colocarmos títulos no gráfico e nos eixos, acertarmos faixas de valores nos eixos e mais alguns detalhes. Agora, iremos utiliza-lo também para plotar o gráfico. Em primeiro lugar, vamos inicializar o ambiente e carregar os dados.</p>
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>pokemons <span class="op">=</span> pd.read_csv(<span class="st">'pokemons.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Depois, fazemos a agregação dos dados no nível da categoria que vamos plotar. Para criarmos um gráfico de pizza bom, vamos plotar o número de pokemons por geração. Isso nos dará poucas categorias (8), e faz sentido ver a distribuição do número de pokemons. Se quiséssemos plotar qualquer outro atributo, como ataque, defesa, etc…, provavelmente um gráfico de pizza não seria indicado, pois não faz sentido representar a soma dos poderes de ataque dos pokemons como um todo.</p>
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pokemons[<span class="st">'Generation Desc'</span>] <span class="op">=</span> pokemons[<span class="st">'Generation'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> gen: <span class="st">'Gen '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(gen)))</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pokemons_gen <span class="op">=</span> pokemons.groupby([<span class="st">'Generation Desc'</span>])[[<span class="st">'Generation'</span>,<span class="st">'Number'</span>]].count().reset_index()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pokemons_gen.sort_values(<span class="st">'Generation Desc'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>plt.pie(pokemons_gen[<span class="st">'Number'</span>], labels<span class="op">=</span>pokemons_gen[<span class="st">'Generation Desc'</span>], autopct<span class="op">=</span><span class="st">"</span><span class="sc">%.2f%%</span><span class="st">"</span>, counterclock<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>E aí está o nosso gráfico de pizza! Importante observar que novamente, fizemos algumas transformações nos dados, incluindo ordenar os dados, porque caso contrário, as fatias ficarão fora de ordem. Vamos adicionar título e legenda, como em todos os nossos outros gráficos.</p>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pokemons[<span class="st">'Generation Desc'</span>] <span class="op">=</span> pokemons[<span class="st">'Generation'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> gen: <span class="st">'Gen '</span> <span class="op">+</span> <span class="bu">str</span>(<span class="bu">int</span>(gen)))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pokemons_gen <span class="op">=</span> pokemons.groupby([<span class="st">'Generation Desc'</span>])[[<span class="st">'Generation'</span>,<span class="st">'Number'</span>]].count().reset_index()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>pokemons_gen.sort_values(<span class="st">'Generation Desc'</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>plt.pie(pokemons_gen[<span class="st">'Number'</span>], labels<span class="op">=</span>pokemons_gen[<span class="st">'Generation Desc'</span>], autopct<span class="op">=</span><span class="st">"</span><span class="sc">%.2f%%</span><span class="st">"</span>, counterclock<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Pokemons por Geração'</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, bbox_to_anchor<span class="op">=</span>(<span class="fl">1.40</span>,<span class="fl">1.02</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="index_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>Pronto, aí está o polêmico gráfico de pizza!</p>
+<section id="conclusão" class="level3">
+<h3 class="anchored" data-anchor-id="conclusão">Conclusão</h3>
+<p>Nesta aula, aprendemos como criar gráficos que nos ajudam a entender como nossas variáveis categóricas se relacionam enquanto partes de um todo. E para isto utilizamos o tão famoso gráfico de Pizza. Também aprendemos em quais casos este tipo de gráfico faz sentido e quando sua utilização prejudica a compreensão dos dados. Se quiser saber mais sobre gráficos de pizza, <a href="https://ibpad.com.br/ciencia-dados/sete-erros-classicos-em-graficos-de-pizza/">clique aqui</a>.</p>
+</section>
+<section id="navegação" class="level3">
+<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
+<table>
+<thead>
+<tr class="header">
+<th><a href="../../posts/data-108/index.html">&lt; Anterior</a></th>
+<th>|</th>
+<th style="text-align: right;"><a href="../../posts/data-110/index.html">Próximo &gt;</a></th>
+</tr>
+</thead>
+
+</table>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

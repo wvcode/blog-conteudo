@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Walter R. Paixão-Côrtes">
+<meta name="dcterms.date" content="2023-02-04">
+<meta name="description" content="Conhecendo nossa ferramenta de trabalho…">
+
+<title>WVCode - Educação e Consultoria - [VDP] Aula 02 - Google Colab</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background-image: url(../../library/bars/bar_002_code.jpg);
+background-size: cover;
+      }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../library/logos/logo_000_wvcode.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">WVCode - Educação e Consultoria</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html" rel="" target="">
+ <span class="menu-text">Sobre</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/wvcode" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">[VDP] Aula 02 - Google Colab</h1>
+                  <div>
+        <div class="description">
+          Conhecendo nossa ferramenta de trabalho…
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Visualização</div>
+                <div class="quarto-category">Notebooks</div>
+                <div class="quarto-category">Jupyter</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Walter R. Paixão-Côrtes </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">February 4, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
+  <li><a href="#o-que-é-o-google-colab" id="toc-o-que-é-o-google-colab" class="nav-link" data-scroll-target="#o-que-é-o-google-colab">O que é o Google Colab?</a></li>
+  <li><a href="#como-acessamos-o-google-colab" id="toc-como-acessamos-o-google-colab" class="nav-link" data-scroll-target="#como-acessamos-o-google-colab">Como acessamos o Google Colab?</a></li>
+  <li><a href="#iniciando-um-novo-notebook" id="toc-iniciando-um-novo-notebook" class="nav-link" data-scroll-target="#iniciando-um-novo-notebook">Iniciando um novo notebook!</a></li>
+  <li><a href="#utilizando-um-notebook" id="toc-utilizando-um-notebook" class="nav-link" data-scroll-target="#utilizando-um-notebook">Utilizando um notebook</a></li>
+  <li><a href="#finalizando" id="toc-finalizando" class="nav-link" data-scroll-target="#finalizando">Finalizando</a></li>
+  <li><a href="#navegação" id="toc-navegação" class="nav-link" data-scroll-target="#navegação">Navegação</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<section id="introdução" class="level3">
+<h3 class="anchored" data-anchor-id="introdução">Introdução</h3>
+<p>Olá Cientista de Dados!</p>
+<p>Nesta aula vamos conhecer o Google Colab, e entender como utiliza-lo em nossas tarefas de Análise e Visualização de Dados.</p>
+<p>Vamos lá?</p>
+</section>
+<section id="o-que-é-o-google-colab" class="level3">
+<h3 class="anchored" data-anchor-id="o-que-é-o-google-colab">O que é o Google Colab?</h3>
+<p>O Google Colab é uma plataforma de computação em nuvem gratuita baseada no <a href="https://jupyter.org/">Jupyter Notebook</a>. Ele permite que os usuários criem e compartilhem documentos que contenham código executável, equações, visualizações e texto explicativo. O Google Colab oferece suporte a várias linguagens de programação populares, incluindo Python, JavaScript e Swift.</p>
+<p>Isto significa que podemos intercalar blocos de texto, imagens e código em um mesmo documento. Como um Cientista de Dados, você vai utilizar muito este recurso tanto nos momentos em que você está trabalhando os dados e construindo o modelo quanto naquele momento em que você precisa comunicar seus achados e resultados para outros cientistas e para o seu público alvo.</p>
+</section>
+<section id="como-acessamos-o-google-colab" class="level3">
+<h3 class="anchored" data-anchor-id="como-acessamos-o-google-colab">Como acessamos o Google Colab?</h3>
+<p>Para acessar o Google Colab, você precisa se conectar com uma conta do Google e acessar o site <a href="https://colab.research.google.com">colab.research.google.com</a>. Você verá então, a seguinte tela:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="colab-001.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Tela Inicial do Colab</figcaption>
+</figure>
+</div>
+<p>Como você pode ver, a primeira atividade que ele sugere é abrir exemplos ou, no meu caso, alguns arquivos mais recentes. O Colab é integrado com o Google Drive, então seus arquivos, que terão sempre a extensão <code>.ipynb</code> estarão sempre salvos lá no seu Drive, em uma pasta específica.</p>
+</section>
+<section id="iniciando-um-novo-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="iniciando-um-novo-notebook">Iniciando um novo notebook!</h3>
+<p>Vamos iniciar? Clique no link “new notebook”. Você deve ver sua tela assim:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="colab-002.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Novo Notebook</figcaption>
+</figure>
+</div>
+<p>Neste momento, vamos destacar três áreas da tela:</p>
+<ol type="1">
+<li>Onde fica o nome do notebook. Você pode modificar quando quiser</li>
+<li>Sistema de arquivos do notebook. Quando iniciamos um novo notebook, temos um sistema de arquivos virtual, onde podemos subir arquivos que serão utilizados durante a execução do código. Esses arquivos são apagados quando o notebook não está ativo.</li>
+<li>Esta é uma célula. Um notebook é feito de um conjunto de células que são executadas sequencialmente. As células podem ser de dois tipos: células de código ou células de texto. A célula que estamos marcando é especificamente uma célula de código, pois tem o botão de execução bem a esquerda.</li>
+</ol>
+<section id="células-de-texto" class="level4">
+<h4 class="anchored" data-anchor-id="células-de-texto">Células de Texto</h4>
+<p>As células de texto nos permitem escrever texto no formato Markdown, que facilita bastante a formatação. Se quiser aprender mais sobre Markdown, <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">clique aqui</a>. Veja alguns exemplos:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="colab-003.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Exemplos de célula de texto</figcaption>
+</figure>
+</div>
+</section>
+<section id="células-de-código" class="level4">
+<h4 class="anchored" data-anchor-id="células-de-código">Células de Código</h4>
+<p>Células de código, como o próprio nome diz, servem para escrever código que será executado. Podemos usar algumas linguagens, sendo que a mais comum é Python. Cada célula, ao ser executada, pode imprimir o resultado de sua execução logo abaixo. Veja um exemplo abaixo:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>response <span class="op">=</span> requests.get(<span class="st">"https://dummyjson.com/products"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>json.dump(json.loads(response.text)[<span class="st">'products'</span>], <span class="bu">open</span>(<span class="st">'products.json'</span>,<span class="st">'w'</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> <span class="bu">open</span>(<span class="st">'products.json'</span>,<span class="st">'r'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># .load("https://dummyjson.com/products")</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_json(raw_data)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">title</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">price</th>
+<th data-quarto-table-cell-role="th">discountPercentage</th>
+<th data-quarto-table-cell-role="th">rating</th>
+<th data-quarto-table-cell-role="th">stock</th>
+<th data-quarto-table-cell-role="th">brand</th>
+<th data-quarto-table-cell-role="th">category</th>
+<th data-quarto-table-cell-role="th">thumbnail</th>
+<th data-quarto-table-cell-role="th">images</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>iPhone 9</td>
+<td>An apple mobile which is nothing like apple</td>
+<td>549</td>
+<td>12.96</td>
+<td>4.69</td>
+<td>94</td>
+<td>Apple</td>
+<td>smartphones</td>
+<td>https://i.dummyjson.com/data/products/1/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/1/1.jpg...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>iPhone X</td>
+<td>SIM-Free, Model A19211 6.5-inch Super Retina H...</td>
+<td>899</td>
+<td>17.94</td>
+<td>4.44</td>
+<td>34</td>
+<td>Apple</td>
+<td>smartphones</td>
+<td>https://i.dummyjson.com/data/products/2/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/2/1.jpg...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Samsung Universe 9</td>
+<td>Samsung's new variant which goes beyond Galaxy...</td>
+<td>1249</td>
+<td>15.46</td>
+<td>4.09</td>
+<td>36</td>
+<td>Samsung</td>
+<td>smartphones</td>
+<td>https://i.dummyjson.com/data/products/3/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/3/1.jpg]</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>OPPOF19</td>
+<td>OPPO F19 is officially announced on April 2021.</td>
+<td>280</td>
+<td>17.91</td>
+<td>4.30</td>
+<td>123</td>
+<td>OPPO</td>
+<td>smartphones</td>
+<td>https://i.dummyjson.com/data/products/4/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/4/1.jpg...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Huawei P30</td>
+<td>Huawei’s re-badged P30 Pro New Edition was off...</td>
+<td>499</td>
+<td>10.58</td>
+<td>4.09</td>
+<td>32</td>
+<td>Huawei</td>
+<td>smartphones</td>
+<td>https://i.dummyjson.com/data/products/5/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/5/1.jpg...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>MacBook Pro</td>
+<td>MacBook Pro 2021 with mini-LED display may lau...</td>
+<td>1749</td>
+<td>11.02</td>
+<td>4.57</td>
+<td>83</td>
+<td>Apple</td>
+<td>laptops</td>
+<td>https://i.dummyjson.com/data/products/6/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/6/1.png...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>Samsung Galaxy Book</td>
+<td>Samsung Galaxy Book S (2020) Laptop With Intel...</td>
+<td>1499</td>
+<td>4.15</td>
+<td>4.25</td>
+<td>50</td>
+<td>Samsung</td>
+<td>laptops</td>
+<td>https://i.dummyjson.com/data/products/7/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/7/1.jpg...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>Microsoft Surface Laptop 4</td>
+<td>Style and speed. Stand out on HD video calls b...</td>
+<td>1499</td>
+<td>10.23</td>
+<td>4.43</td>
+<td>68</td>
+<td>Microsoft Surface</td>
+<td>laptops</td>
+<td>https://i.dummyjson.com/data/products/8/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/8/1.jpg...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>Infinix INBOOK</td>
+<td>Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 ...</td>
+<td>1099</td>
+<td>11.83</td>
+<td>4.54</td>
+<td>96</td>
+<td>Infinix</td>
+<td>laptops</td>
+<td>https://i.dummyjson.com/data/products/9/thumbn...</td>
+<td>[https://i.dummyjson.com/data/products/9/1.jpg...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>HP Pavilion 15-DK1056WM</td>
+<td>HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen...</td>
+<td>1099</td>
+<td>6.18</td>
+<td>4.43</td>
+<td>89</td>
+<td>HP Pavilion</td>
+<td>laptops</td>
+<td>https://i.dummyjson.com/data/products/10/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/10/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>11</td>
+<td>perfume Oil</td>
+<td>Mega Discount, Impression of Acqua Di Gio by G...</td>
+<td>13</td>
+<td>8.40</td>
+<td>4.26</td>
+<td>65</td>
+<td>Impression of Acqua Di Gio</td>
+<td>fragrances</td>
+<td>https://i.dummyjson.com/data/products/11/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/11/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>12</td>
+<td>Brown Perfume</td>
+<td>Royal_Mirage Sport Brown Perfume for Men &amp; Wom...</td>
+<td>40</td>
+<td>15.66</td>
+<td>4.00</td>
+<td>52</td>
+<td>Royal_Mirage</td>
+<td>fragrances</td>
+<td>https://i.dummyjson.com/data/products/12/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/12/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>13</td>
+<td>Fog Scent Xpressio Perfume</td>
+<td>Product details of Best Fog Scent Xpressio Per...</td>
+<td>13</td>
+<td>8.14</td>
+<td>4.59</td>
+<td>61</td>
+<td>Fog Scent Xpressio</td>
+<td>fragrances</td>
+<td>https://i.dummyjson.com/data/products/13/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/13/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>14</td>
+<td>Non-Alcoholic Concentrated Perfume Oil</td>
+<td>Original Al Munakh® by Mahal Al Musk | Our Imp...</td>
+<td>120</td>
+<td>15.60</td>
+<td>4.21</td>
+<td>114</td>
+<td>Al Munakh</td>
+<td>fragrances</td>
+<td>https://i.dummyjson.com/data/products/14/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/14/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>15</td>
+<td>Eau De Perfume Spray</td>
+<td>Genuine Al-Rehab spray perfume from UAE/Saudi...</td>
+<td>30</td>
+<td>10.99</td>
+<td>4.70</td>
+<td>105</td>
+<td>Lord - Al-Rehab</td>
+<td>fragrances</td>
+<td>https://i.dummyjson.com/data/products/15/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/15/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>16</td>
+<td>Hyaluronic Acid Serum</td>
+<td>L'OrÃ©al Paris introduces Hyaluron Expert Repl...</td>
+<td>19</td>
+<td>13.31</td>
+<td>4.83</td>
+<td>110</td>
+<td>L'Oreal Paris</td>
+<td>skincare</td>
+<td>https://i.dummyjson.com/data/products/16/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/16/1.pn...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>17</td>
+<td>Tree Oil 30ml</td>
+<td>Tea tree oil contains a number of compounds, i...</td>
+<td>12</td>
+<td>4.09</td>
+<td>4.52</td>
+<td>78</td>
+<td>Hemani Tea</td>
+<td>skincare</td>
+<td>https://i.dummyjson.com/data/products/17/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/17/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>18</td>
+<td>Oil Free Moisturizer 100ml</td>
+<td>Dermive Oil Free Moisturizer with SPF 20 is sp...</td>
+<td>40</td>
+<td>13.10</td>
+<td>4.56</td>
+<td>88</td>
+<td>Dermive</td>
+<td>skincare</td>
+<td>https://i.dummyjson.com/data/products/18/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/18/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>19</td>
+<td>Skin Beauty Serum.</td>
+<td>Product name: rorec collagen hyaluronic acid w...</td>
+<td>46</td>
+<td>10.68</td>
+<td>4.42</td>
+<td>54</td>
+<td>ROREC White Rice</td>
+<td>skincare</td>
+<td>https://i.dummyjson.com/data/products/19/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/19/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>20</td>
+<td>Freckle Treatment Cream- 15gm</td>
+<td>Fair &amp; Clear is Pakistan's only pure Freckle c...</td>
+<td>70</td>
+<td>16.99</td>
+<td>4.06</td>
+<td>140</td>
+<td>Fair &amp; Clear</td>
+<td>skincare</td>
+<td>https://i.dummyjson.com/data/products/20/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/20/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>21</td>
+<td>- Daal Masoor 500 grams</td>
+<td>Fine quality Branded Product Keep in a cool an...</td>
+<td>20</td>
+<td>4.81</td>
+<td>4.44</td>
+<td>133</td>
+<td>Saaf &amp; Khaas</td>
+<td>groceries</td>
+<td>https://i.dummyjson.com/data/products/21/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/21/1.pn...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>22</td>
+<td>Elbow Macaroni - 400 gm</td>
+<td>Product details of Bake Parlor Big Elbow Macar...</td>
+<td>14</td>
+<td>15.58</td>
+<td>4.57</td>
+<td>146</td>
+<td>Bake Parlor Big</td>
+<td>groceries</td>
+<td>https://i.dummyjson.com/data/products/22/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/22/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>23</td>
+<td>Orange Essence Food Flavou</td>
+<td>Specifications of Orange Essence Food Flavour ...</td>
+<td>14</td>
+<td>8.04</td>
+<td>4.85</td>
+<td>26</td>
+<td>Baking Food Items</td>
+<td>groceries</td>
+<td>https://i.dummyjson.com/data/products/23/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/23/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>24</td>
+<td>cereals muesli fruit nuts</td>
+<td>original fauji cereal muesli 250gm box pack or...</td>
+<td>46</td>
+<td>16.80</td>
+<td>4.94</td>
+<td>113</td>
+<td>fauji</td>
+<td>groceries</td>
+<td>https://i.dummyjson.com/data/products/24/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/24/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>25</td>
+<td>Gulab Powder 50 Gram</td>
+<td>Dry Rose Flower Powder Gulab Powder 50 Gram • ...</td>
+<td>70</td>
+<td>13.58</td>
+<td>4.87</td>
+<td>47</td>
+<td>Dry Rose</td>
+<td>groceries</td>
+<td>https://i.dummyjson.com/data/products/25/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/25/1.pn...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>26</td>
+<td>Plant Hanger For Home</td>
+<td>Boho Decor Plant Hanger For Home Wall Decorati...</td>
+<td>41</td>
+<td>17.86</td>
+<td>4.08</td>
+<td>131</td>
+<td>Boho Decor</td>
+<td>home-decoration</td>
+<td>https://i.dummyjson.com/data/products/26/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/26/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">26</td>
+<td>27</td>
+<td>Flying Wooden Bird</td>
+<td>Package Include 6 Birds with Adhesive Tape Sha...</td>
+<td>51</td>
+<td>15.58</td>
+<td>4.41</td>
+<td>17</td>
+<td>Flying Wooden</td>
+<td>home-decoration</td>
+<td>https://i.dummyjson.com/data/products/27/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/27/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">27</td>
+<td>28</td>
+<td>3D Embellishment Art Lamp</td>
+<td>3D led lamp sticker Wall sticker 3d wall art l...</td>
+<td>20</td>
+<td>16.49</td>
+<td>4.82</td>
+<td>54</td>
+<td>LED Lights</td>
+<td>home-decoration</td>
+<td>https://i.dummyjson.com/data/products/28/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/28/1.jp...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">28</td>
+<td>29</td>
+<td>Handcraft Chinese style</td>
+<td>Handcraft Chinese style art luxury palace hote...</td>
+<td>60</td>
+<td>15.34</td>
+<td>4.44</td>
+<td>7</td>
+<td>luxury palace</td>
+<td>home-decoration</td>
+<td>https://i.dummyjson.com/data/products/29/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/29/1.jp...</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">29</td>
+<td>30</td>
+<td>Key Holder</td>
+<td>Attractive DesignMetallic materialFour key hoo...</td>
+<td>30</td>
+<td>2.92</td>
+<td>4.92</td>
+<td>54</td>
+<td>Golden</td>
+<td>home-decoration</td>
+<td>https://i.dummyjson.com/data/products/30/thumb...</td>
+<td>[https://i.dummyjson.com/data/products/30/1.jp...</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>Esta célula, se executada, irá carregar dados de um site, salvar um arquivo e carrega-lo em um DataFrame que depois será impresso na área de resultados.</p>
+</section>
+</section>
+<section id="utilizando-um-notebook" class="level3">
+<h3 class="anchored" data-anchor-id="utilizando-um-notebook">Utilizando um notebook</h3>
+<p>Os exemplos acima são bons para mostrar cada parte separadamente, mas vamos a um exemplo que irá ilustrar a utilização típica destes blocos.</p>
+<section id="exemplo" class="level4">
+<h4 class="anchored" data-anchor-id="exemplo">Exemplo</h4>
+<p>Digamos que você precisa entregar um relatório para o professor sobre quais são os primeiros 1000 números primos. Ele também solicita que você explique o que são números primos e como descobrir se um número é primo ou não.</p>
+<p>Em um cenário tradicional de programação, provavelmente se faria a entrega de pelo menos dois arquivos: um documento do word, por exemplo, com a parte descritiva e um arquivo de código-fonte com o código. Como o arquivo de código-fonte não guarda o resultado da execução, é muito provável que este resultado fosse adicionado ao documento do word, ou quem sabe, disponibilizado em um terceiro arquivo.</p>
+<p>Dá um certo trabalho preparar tudo… Além precisar de um computador com Word e com um editor de código-fonte para fazer todo o relatório. Mas com o Google Colab, você pode fazer tudo em um único lugar: um notebook pode ser editado de qualquer lugar, através do browser!</p>
+<p>Veja o resultado abaixo:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="colab-004.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">Notebook completo</figcaption>
+</figure>
+</div>
+<p>É bem interessante, não é mesmo? Tudo em um único documento, que eu posso compartilhar com outras pessoas, sem nenhuma complicação. E o melhor, quem abre este notebook, pode executar as partes que são código, quando bem quiserem, sem depender de você para atualizar os resultados.</p>
+</section>
+</section>
+<section id="finalizando" class="level3">
+<h3 class="anchored" data-anchor-id="finalizando">Finalizando</h3>
+<p>Espero que você tenha gostado de aprender um pouco sobre o ambiente de desenvolvimento que iremos utilizar neste curso. Ao longo do curso, utilizaremos recursos mais avançados, então não perca a oportunidade de aprender mais sobre o Google Colab com estes links abaixo:</p>
+<ul>
+<li><a href="https://www.alura.com.br/artigos/google-colab-o-que-e-e-como-usar?gclid=CjwKCAiAxvGfBhB-EiwAMPakqjBnFPSyZyay7wg-cefz02KTf52hSDkUZ-sUAXtIgv6x79w8AKjrghoCSAYQAvD_BwE">O que é Google Colab</a></li>
+<li><a href="https://www.hashtagtreinamentos.com/programar-online-google-colab-python">Google Colaboratory - Hashtag Treinamentos</a></li>
+<li><a href="https://kenzie.com.br/blog/google-colab/">Vantagens de usar o Google Colab</a></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Os artigos citado acima e o conteúdo apresentado nesta aula não são de maneira nenhuma uma revisão extensiva do Google Colab, apresentamos apenas o necessário para você andar com seus próprios pés e no seu ritmo!</p>
+</div>
+</div>
+</section>
+<section id="navegação" class="level3">
+<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
+<table>
+<thead>
+<tr class="header">
+<th><a href="../../posts/data-101/index.html">&lt; Anterior</a></th>
+<th>|</th>
+<th style="text-align: right;"><a href="../../posts/data-103/index.html">Próximo &gt;</a></th>
+</tr>
+</thead>
+
+</table>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

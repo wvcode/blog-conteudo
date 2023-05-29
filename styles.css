@@ -1,0 +1,76 @@
+/* css styles */
+
+@import url(https://fonts.googleapis.com/css?family=MuseoModerno:100,200,300,400,500,600,700,800,900&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap);
+
+body {
+  font-family: Jost;
+  font-size: 1rem;
+}
+
+h1 {
+  font-family: 'MuseoModerno', display;
+  font-size: 3.5rem;
+  line-height: 1.1;
+}
+
+
+h2 {
+  font-family: 'MuseoModerno', display;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+h3 {
+  font-family: 'Jost', display;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+h4 {
+  font-family: 'Jost', display;
+  font-size: 1.0rem;
+  line-height: 1.1;
+}
+
+h5 {
+  font-family: 'Jost', display;
+  font-size: 0.75rem;
+  line-height: 1.1;
+}
+
+h6 {
+  font-family: 'Jost', display;
+  font-size: 0.5rem;
+  line-height: 1.1;
+}
+
+
+ol, ul {
+  padding-left: 1em;
+}
+
+.quarto-about-trestles .about-entity {
+  font-size: 0.70rem;
+}
+
+.quarto-about-trestles .about-entity .quarto-title-block .quarto-title .title {
+  font-family: Jost;
+  font-size: 1.75rem;
+}
+
+.bg-primary {
+  background-color: #33358c !important;
+}
+.bg-success {
+  background-color: #40b0bf !important;
+}
+.bg-info {
+  background-color: #72dfe9 !important;
+}
+.bg-warning {
+  background-color: #a8aaf1 !important;
+}
+.bg-danger {
+  background-color: #ff9966 !important;
+}
