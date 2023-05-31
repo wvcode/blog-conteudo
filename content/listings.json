@@ -2,10 +2,27 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/dt_welcome/index.html",
-      "/posts/dt_data-000/index.html",
-      "/posts/tl_post_0001/index.html",
-      "/posts/tl_post_0002/index.html"
+      "/posts/p0001-boas-vindas/index.html",
+      "/posts/p0003-powerbiclient/index.html",
+      "/posts/p0002-pandasai/index.html",
+      "/posts/data-116/index.html",
+      "/posts/data-115/index.html",
+      "/posts/data-114/index.html",
+      "/posts/data-112/index.html",
+      "/posts/data-113/index.html",
+      "/posts/data-111/index.html",
+      "/posts/data-110/index.html",
+      "/posts/data-108/index.html",
+      "/posts/data-109/index.html",
+      "/posts/data-107/index.html",
+      "/posts/data-106/index.html",
+      "/posts/data-105/index.html",
+      "/posts/data-104/index.html",
+      "/posts/data-103/index.html",
+      "/posts/data-102/index.html",
+      "/posts/data-101/index.html",
+      "/posts/data-010/index.html",
+      "/posts/data-100/index.html"
     ]
   }
 ]
