@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-02-07">
 <meta name="description" content="Preparando dados como gente grande!">
 
-<title>WVCode - Educação e Consultoria - [VDP] Aula 05 - Pandas</title>
+<title>[VDP] Aula 05 - Pandas – WV Code - Educação e Consultoria</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -82,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -91,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -104,7 +111,7 @@ background-size: cover;
       }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -114,41 +121,41 @@ background-size: cover;
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../library/logos/logo_000_wvcode.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">WVCode - Educação e Consultoria</span>
+    <span class="navbar-title">WV Code - Educação e Consultoria</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">Sobre</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">Sobre</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/wvcode" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/wvcode"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -223,6 +230,7 @@ background-size: cover;
 
 
 
+
 <section id="introdução" class="level2">
 <h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
 <p>Olá Cientista de Dados!</p>
@@ -241,7 +249,7 @@ background-size: cover;
 <section id="carregando-pandas-no-notebook" class="level3">
 <h3 class="anchored" data-anchor-id="carregando-pandas-no-notebook">Carregando Pandas no notebook</h3>
 <p>A primeira coisa que devemos fazer é carregar a biblioteca em nosso notebook. Fazemos isso com o comando <code>import</code>.</p>
-<div class="cell" data-execution_count="2">
+<div id="cell-11" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -271,20 +279,20 @@ Tip
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> key, value <span class="kw">in</span> pokemon.items():</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      pokemons.setdefault(key,[]).append(value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Utilizando pandas, isso será substituído por uma única linha:</p>
-<div class="cell" data-execution_count="3">
+<div id="cell-16" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pokemons <span class="op">=</span> pd.read_csv(<span class="st">'pokemons.csv'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Ficou bem mais fácil, não é mesmo? Da mesma forma, verificar o conteúdo que foi carregado também se simplifica - vai disso aqui:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> indice <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">2</span>):    <span class="co"># executa um loop dos dois primeiros elementos do array</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(pokemons[indice])     <span class="co"># imprime o elemento</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>para isso aqui:</p>
-<div class="cell" data-execution_count="4">
+<div id="cell-18" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pokemons.head(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -386,13 +394,13 @@ Tip
 <section id="head" class="level4">
 <h4 class="anchored" data-anchor-id="head"><code>head()</code></h4>
 <p>Esta função lista as primeiras linhas de dados. O pârametro é opcional, o que fará com que a função liste 10 linhas de dados.</p>
-<div class="cell" data-execution_count="5">
+<div id="cell-25" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pokemons.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -551,13 +559,13 @@ Tip
 <section id="tail" class="level4">
 <h4 class="anchored" data-anchor-id="tail"><code>tail()</code></h4>
 <p>Esta função lista as últimas linhas de dados. O pârametro é opcional, o que fará com que a função liste 10 linhas de dados.</p>
-<div class="cell" data-execution_count="6">
+<div id="cell-28" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>pokemons.tail(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -716,13 +724,13 @@ Tip
 <section id="sample" class="level4">
 <h4 class="anchored" data-anchor-id="sample"><code>sample()</code></h4>
 <p>Enquanto <code>head()</code> e <code>tail()</code> mostra o início e o fim do conjunto de dados, o <code>sample()</code> traz linhas aleatórias do conjunto, o que pode ser bem interessante.</p>
-<div class="cell" data-execution_count="7">
+<div id="cell-31" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pokemons.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -882,13 +890,13 @@ Tip
 <h4 class="anchored" data-anchor-id="describe"><code>describe()</code></h4>
 <p>Esta função nos ajuda a ter uma idéia dos valores que temos em nosso conjunto de dados. A função lista todas as colunas numéricas e apresenta os resultados para os seguintes cálculos estatísticos: média, desvio padrão, valor mínimo, percentil 25%, 50%, 75% e valor máximo.</p>
 <p>Isso nos dá uma idéia da variabilidade dos nossos dados, bem como permite uma análise de correlação superficial entre os valores numéricos.</p>
-<div class="cell" data-execution_count="8">
+<div id="cell-34" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pokemons.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1125,7 +1133,7 @@ Tip
 <li>para cada coluna, seu tipo</li>
 <li>E ainda o número total de linhas e colunas no DataFrame</li>
 </ul>
-<div class="cell" data-execution_count="9">
+<div id="cell-37" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pokemons.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -1185,7 +1193,7 @@ memory usage: 354.9+ KB</code></pre>
 <section id="shape" class="level4">
 <h4 class="anchored" data-anchor-id="shape"><code>shape</code></h4>
 <p>Esta não é uma função, mas sim uma propriedade, que retorna uma tupla com as dimensões de linha e coluna do DataFrame.</p>
-<div class="cell" data-execution_count="10">
+<div id="cell-40" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pokemons.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>(1032, 44)</code></pre>
@@ -1200,11 +1208,11 @@ memory usage: 354.9+ KB</code></pre>
 <section id="acessando-uma-coluna-do-dataframe" class="level4">
 <h4 class="anchored" data-anchor-id="acessando-uma-coluna-do-dataframe"><em>Acessando uma coluna do DataFrame</em></h4>
 <p>Pode parecer óbvio, mas para acessar a coluna de um DataFrame, basta fazer o seguinte:</p>
-<div class="cell" data-execution_count="12">
+<div id="cell-46" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tipos <span class="op">=</span> pokemons[<span class="st">"Type 1"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Assim, a variável tipos conterá o que chamamos de uma Series, que é um array <code>numpy</code> (biblioteca especializada para criação de arrays numéricos) que contém todas as linhas daquela coluna. Para comprovar isso, vamos imprimir o conteúdo.</p>
-<div class="cell" data-execution_count="13">
+<div id="cell-48" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>tipos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>0         Grass
@@ -1222,7 +1230,7 @@ Name: Type 1, Length: 1032, dtype: object</code></pre>
 </div>
 </div>
 <p>Parece interessante. Mas e se quisessemos criar um novo DataFrame apenas com as colunas Number, Name e Type 1? Parece simples, basta enviar ao DataFrame um array com o nome das colunas que quero extrair.</p>
-<div class="cell" data-execution_count="15">
+<div id="cell-50" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sub_df <span class="op">=</span> pokemons[[<span class="st">"Number"</span>, <span class="st">"Name"</span>, <span class="st">"Type 1"</span>]]</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>sub_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1230,7 +1238,7 @@ Name: Type 1, Length: 1032, dtype: object</code></pre>
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1327,7 +1335,7 @@ Tip
 </div>
 </div>
 <p>Mas, e como podemos acessar uma linha específica de um DataFrame? Se você está seguindo a linha de raciocínio, já imaginou que não é da maneira tradicional. Na verdade, é exatamente ao contrário do que estamos acostumados. Primeiro acessamos a coluna, e depois a linha, enquanto que em conjuntos de dados em formato tabular largo, primeiro acessamos a linha e depois a coluna.</p>
-<div class="cell" data-execution_count="16">
+<div id="cell-53" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>pokemons[<span class="st">"Name"</span>][<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>'Bulbasaur'</code></pre>
@@ -1337,7 +1345,7 @@ Tip
 <section id="percorrendo-um-dataframe" class="level4">
 <h4 class="anchored" data-anchor-id="percorrendo-um-dataframe">Percorrendo um DataFrame</h4>
 <p>Interessante, certo? Mas isso levanta o seguinte questionamento: quando vou manipular os dados, como filtra-los ou fazer alguma modificação? Nos conjuntos de dados mais tradicionais, eu geralmente percorro o meu conjunto de dados linha a linha e faço os filtros e então altero as colunas. Como fazer isso em pandas?</p>
-<div class="cell" data-execution_count="18">
+<div id="cell-56" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> index, pokemon <span class="kw">in</span> pokemons.iterrows():</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> index <span class="op">&lt;=</span> <span class="dv">2</span>:</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(pokemon[<span class="st">"Name"</span>])</span>
@@ -1350,7 +1358,7 @@ Venusaur</code></pre>
 </div>
 </div>
 <p>Como pode ser visto no código acima, basta usarmos a função <code>iterrows()</code> e iremos manipular o DataFrame como uma estrutura de dados mais tradicional, como um array de dicionário de dados. No código acima, fizemos um filtro que pega apenas as linhas com index menor ou igual 2, e mostra apenas o nome. Se DataFrames fossem estruturas de dados tradicionais, isso seria a maneira mais lógica de executar esse comando. Mas com pandas, podemos fazer isso:</p>
-<div class="cell" data-execution_count="20">
+<div id="cell-58" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>pokemons[pokemons[<span class="st">"Number"</span>] <span class="op">&lt;=</span> <span class="dv">3</span>][<span class="st">"Name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="20">
 <pre><code>0        Bulbasaur
@@ -1375,7 +1383,7 @@ Warning
 </div>
 </div>
 <p>Esta linha também nos introduz ao primeiro jeito de realizar filtros de linha: adicionando a expressão lógica nos primeiros parenteses. Parece simples, embora para referenciar ao campo que será utilizado no filtro, eu ainda precise referenciar o próprio DataFrame. E esse foi apenas um filtro simples. Como seria utilizar mais de um campo no filtro? Vamos ver agora mesmo.</p>
-<div class="cell" data-execution_count="22">
+<div id="cell-62" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pokemons[(pokemons[<span class="st">"Number"</span>] <span class="op">&lt;</span> <span class="dv">11</span>) <span class="op">&amp;</span> (pokemons[<span class="st">"Type 1"</span>] <span class="op">==</span> <span class="st">"Bug"</span>)][<span class="st">"Name"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>13    Caterpie
@@ -1384,13 +1392,13 @@ Name: Name, dtype: object</code></pre>
 </div>
 <p>Podemos perceber duas coisas: cada condição de filtro deve estar envolta em parenteses (vá em frente, se remover, teremos um erro), e em vez de usar o conector lógico tradicional AND ou OR, utilizamos &amp; (AND) ou | (OR). E quanto mais condições, pior será para lermos com clareza nosso código.</p>
 <p>Uma variação deste tipo de filtragem é a utilização da propriedade <code>loc</code>. Ela nos permite acessar linhas diretamente, e utilizando a notação de manipulação de arrays, filtrar rapidamente o DataFrame. Vamos a um exemplo: gostaria de extrair 10 linhas do DataFrame, iniciando na linha 10.</p>
-<div class="cell" data-execution_count="25">
+<div id="cell-64" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pokemons.loc[<span class="dv">10</span>:<span class="dv">19</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1667,13 +1675,13 @@ Name: Name, dtype: object</code></pre>
 </div>
 <p>Bem prático. A propriedade <code>loc</code> também pode entender o filtro anterior.</p>
 <p>E agora, a última maneira pela qual podemos realizar filtros em nossos DataFrames e a mais recomendada devido a legibilidade do código gerado: vamos utilizar a função <code>query()</code>. Esta função permite que escrevamos filtros para o DataFrame como se o mesmo fosse um banco de dados, deixando o código mais limpo, pois eliminamos a necessidade de referenciar o DataFrame a cada filtro, bem como parênteses redundantes. Vamos ver um exemplo:</p>
-<div class="cell" data-execution_count="38">
+<div id="cell-66" class="cell" data-execution_count="38">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pokemons.query(<span class="st">"Number &lt; 11 and `Type 1` == 'Bug'"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="38">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1739,13 +1747,13 @@ Name: Name, dtype: object</code></pre>
 <h3 class="anchored" data-anchor-id="agregando-os-dados">Agregando os dados</h3>
 <p>Em muitos casos, não queremos apenas filtrar os dados, mas também realizar totalizações, calcular valores médios, ou até mesmo cálculos mais complexos, de dados que devem ser agregados em um ou mais níveis.</p>
 <p>Como exemplo, vamos supor que quisessemos totalizar o número de pokemons de acordo com o seu tipo.</p>
-<div class="cell" data-execution_count="42">
+<div id="cell-70" class="cell" data-execution_count="42">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pokemons.groupby([<span class="st">'Type 1'</span>])[<span class="st">"Name"</span>].count().reset_index(name<span class="op">=</span><span class="st">"Pokemons"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="42">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1859,13 +1867,13 @@ Name: Name, dtype: object</code></pre>
 </ul>
 <p>Ufa, e tudo isso em apenas uma linha!</p>
 <p>A fórmula para a agregação é sempre a mesma: groupby() e tipo de calculo (sum, count, mean, …). Por exemplo, no código abaixo, vamos agrupar também pela geração.</p>
-<div class="cell" data-execution_count="43">
+<div id="cell-72" class="cell" data-execution_count="43">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>pokemons.groupby([<span class="st">'Generation'</span>, <span class="st">'Type 1'</span>])[<span class="st">'Name'</span>].count().reset_index(name<span class="op">=</span><span class="st">'Pokemons'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="43">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -1949,13 +1957,13 @@ Name: Name, dtype: object</code></pre>
 </div>
 </div>
 <p>E se quisermos saber a média de pontos de vida por geração de pokemon? Parece simples…</p>
-<div class="cell" data-execution_count="46">
+<div id="cell-74" class="cell" data-execution_count="46">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>pokemons.groupby([<span class="st">'Generation'</span>])[<span class="st">'HP'</span>].mean().reset_index(name<span class="op">=</span><span class="st">'Average HP'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="46">
 <div>
 
 
-<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
@@ -2032,7 +2040,7 @@ Name: Name, dtype: object</code></pre>
 </ul>
 <section id="navegação" class="level3">
 <h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
-<table>
+<table class="caption-top">
 <thead>
 <tr class="header">
 <th><a href="../../posts/data-104/index.html">&lt; Anterior</a></th>
@@ -2083,18 +2091,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2126,11 +2123,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2140,8 +2176,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2153,7 +2198,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2197,6 +2365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2222,6 +2391,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2282,6 +2477,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

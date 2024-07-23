@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>WVCode - Educação e Consultoria</title>
+<title>WV Code - Educação e Consultoria</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -92,8 +99,35 @@ ul.task-list li input[type="checkbox"] {
   })
   </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -102,40 +136,40 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./library/logos/logo_000_wvcode.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">WVCode - Educação e Consultoria</span>
+    <span class="navbar-title">WV Code - Educação e Consultoria</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">Sobre</span></a>
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">Sobre</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/wvcode" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/wvcode"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -148,6 +182,7 @@ ul.task-list li input[type="checkbox"] {
     <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(22)</span></div><div class="category" data-category="AI">AI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Bancos de Dados">Bancos de Dados <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Boas Práticas">Boas Práticas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ciência de Dados">Ciência de Dados <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Cursos">Cursos <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Dados">Dados <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Formato Largo">Formato Largo <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Formato Longo">Formato Longo <span class="quarto-category-count">(1)</span></div><div class="category" data-category="GPT">GPT <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Geral">Geral <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Barras">Gráfico de Barras <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Colunas">Gráfico de Colunas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Dispersão">Gráfico de Dispersão <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Linhas">Gráfico de Linhas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Pizza">Gráfico de Pizza <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gráfico de Áreas">Gráfico de Áreas <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Jupyter">Jupyter <span class="quarto-category-count">(3)</span></div><div class="category" data-category="MatPlotLib">MatPlotLib <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Network Mapping">Network Mapping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Notebooks">Notebooks <span class="quarto-category-count">(2)</span></div><div class="category" data-category="OpenAI API">OpenAI API <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Pandas">Pandas <span class="quarto-category-count">(16)</span></div><div class="category" data-category="Plotly">Plotly <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Power BI">Power BI <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Prática">Prática <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Python">Python <span class="quarto-category-count">(16)</span></div><div class="category" data-category="Quadrante Mágico">Quadrante Mágico <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Sankey Chart">Sankey Chart <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Seaborn">Seaborn <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Teoria">Teoria <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Visualização">Visualização <span class="quarto-category-count">(17)</span></div><div class="category" data-category="Wordcloud">Wordcloud <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
+
 
 
 
@@ -180,32 +215,30 @@ ul.task-list li input[type="checkbox"] {
     </div>
 </div>
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="OpenAI API" data-listing-date-sort="1686873600000" data-listing-file-modified-sort="1687036135372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="quarto-post image-right" data-index="0" data-categories="OpenAI API" data-listing-date-sort="1686873600000" data-listing-file-modified-sort="1721754649929" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1851">
 <div class="thumbnail">
-<p><a href="./posts/p0004-classif-texto/index.html"> <img src="./posts/p0004-classif-texto/nlp-text-classif.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/p0004-classif-texto/index.html" class="no-external"></a></p><a href="./posts/p0004-classif-texto/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/p0004-classif-texto/nlp-text-classif.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/p0004-classif-texto/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/p0004-classif-texto/index.html">
 <h3 class="no-anchor listing-title">
-AI na Análise de Dados - 1 - Classificação de Texto com a API da OpenAI
+<a href="./posts/p0004-classif-texto/index.html" class="no-external">AI na Análise de Dados - 1 - Classificação de Texto com a API da OpenAI</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/p0004-classif-texto/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('OpenAI API'); return false;">
 OpenAI API
 </div>
 </div>
-<a href="./posts/p0004-classif-texto/index.html">
 <div class="listing-description">
-<p>Vamos utilizar a API da OpenAI para executar uma das tarefas mais comuns em NLP - a classificação de textos.</p>
+<a href="./posts/p0004-classif-texto/index.html" class="no-external">Vamos utilizar a API da OpenAI para executar uma das tarefas mais comuns em NLP - a classificação de textos.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/p0004-classif-texto/index.html">
+<a href="./posts/p0004-classif-texto/index.html" class="no-external">
 <div class="listing-date">
 Jun 16, 2023
 </div>
@@ -215,32 +248,30 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Geral" data-listing-date-sort="1685491200000" data-listing-file-modified-sort="1687036135368" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="1" data-categories="Geral" data-listing-date-sort="1685491200000" data-listing-file-modified-sort="1721754649925" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="225">
 <div class="thumbnail">
-<p><a href="./posts/p0001-boas-vindas/index.html"> <p class="card-img-top"><img src="library/concepts/programming_place.jpg"  class="thumbnail-image card-img"/></p> </a></p>
+<p><a href="./posts/p0001-boas-vindas/index.html" class="no-external"></a></p><a href="./posts/p0001-boas-vindas/index.html" class="no-external">
+<p class="card-img-top"><img src="library/concepts/programming_place.jpg"  class="thumbnail-image card-img"/></p>
+</a><p><a href="./posts/p0001-boas-vindas/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/p0001-boas-vindas/index.html">
 <h3 class="no-anchor listing-title">
-Bem-vindos(as)!
+<a href="./posts/p0001-boas-vindas/index.html" class="no-external">Bem-vindos(as)!</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/p0001-boas-vindas/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Geral'); return false;">
 Geral
 </div>
 </div>
-<a href="./posts/p0001-boas-vindas/index.html">
 <div class="listing-description">
-<p>Leia este post primeiro!</p>
+<a href="./posts/p0001-boas-vindas/index.html" class="no-external">Leia este post primeiro!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/p0001-boas-vindas/index.html">
+<a href="./posts/p0001-boas-vindas/index.html" class="no-external">
 <div class="listing-date">
 May 31, 2023
 </div>
@@ -250,19 +281,19 @@ Vanessa , Walter
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="Pandas,Power BI,Jupyter" data-listing-date-sort="1685404800000" data-listing-file-modified-sort="1687036135372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="2" data-categories="Pandas,Power BI,Jupyter" data-listing-date-sort="1685404800000" data-listing-file-modified-sort="1721754649929" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="881">
 <div class="thumbnail">
-<p><a href="./posts/p0003-powerbiclient/index.html"> <img src="./posts/p0003-powerbiclient/jupyterpowerbi.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/p0003-powerbiclient/index.html" class="no-external"></a></p><a href="./posts/p0003-powerbiclient/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/p0003-powerbiclient/jupyterpowerbi.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/p0003-powerbiclient/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/p0003-powerbiclient/index.html">
 <h3 class="no-anchor listing-title">
-Power BI no Jupyter!
+<a href="./posts/p0003-powerbiclient/index.html" class="no-external">Power BI no Jupyter!</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/p0003-powerbiclient/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Pandas'); return false;">
 Pandas
@@ -274,14 +305,12 @@ Power BI
 Jupyter
 </div>
 </div>
-<a href="./posts/p0003-powerbiclient/index.html">
 <div class="listing-description">
-<p>Use o Power BI para plotar gráficos no seu Jupyter Notebook.</p>
+<a href="./posts/p0003-powerbiclient/index.html" class="no-external">Use o Power BI para plotar gráficos no seu Jupyter Notebook.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/p0003-powerbiclient/index.html">
+<a href="./posts/p0003-powerbiclient/index.html" class="no-external">
 <div class="listing-date">
 May 30, 2023
 </div>
@@ -291,19 +320,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="Ciência de Dados,Pandas,AI,GPT" data-listing-date-sort="1685318400000" data-listing-file-modified-sort="1687036135368" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="3" data-categories="Ciência de Dados,Pandas,AI,GPT" data-listing-date-sort="1685318400000" data-listing-file-modified-sort="1721754649925" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1082">
 <div class="thumbnail">
-<p><a href="./posts/p0002-pandasai/index.html"> <img src="./posts/p0002-pandasai/panda-001.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/p0002-pandasai/index.html" class="no-external"></a></p><a href="./posts/p0002-pandasai/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/p0002-pandasai/panda-001.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/p0002-pandasai/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/p0002-pandasai/index.html">
 <h3 class="no-anchor listing-title">
-Pandas AI - Converse com seu DataFrame
+<a href="./posts/p0002-pandasai/index.html" class="no-external">Pandas AI - Converse com seu DataFrame</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/p0002-pandasai/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Ciência de Dados'); return false;">
 Ciência de Dados
@@ -318,14 +347,12 @@ AI
 GPT
 </div>
 </div>
-<a href="./posts/p0002-pandasai/index.html">
 <div class="listing-description">
-<p>Nova biblioteca se propõe a permitir que você “converse” com o seu DataFrame.</p>
+<a href="./posts/p0002-pandasai/index.html" class="no-external">Nova biblioteca se propõe a permitir que você “converse” com o seu DataFrame.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/p0002-pandasai/index.html">
+<a href="./posts/p0002-pandasai/index.html" class="no-external">
 <div class="listing-date">
 May 29, 2023
 </div>
@@ -335,19 +362,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Visualização,Python,Pandas,Plotly" data-listing-date-sort="1676678400000" data-listing-file-modified-sort="1687036135368" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="4" data-categories="Visualização,Python,Pandas,Plotly" data-listing-date-sort="1676678400000" data-listing-file-modified-sort="1721754649925" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="562">
 <div class="thumbnail">
-<p><a href="./posts/data-116/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-116/index.html" class="no-external"></a></p><a href="./posts/data-116/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-116/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-116/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 16 - Criando Visualizações Efetivas
+<a href="./posts/data-116/index.html" class="no-external">[VDP] Aula 16 - Criando Visualizações Efetivas</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-116/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -362,14 +389,12 @@ Pandas
 Plotly
 </div>
 </div>
-<a href="./posts/data-116/index.html">
 <div class="listing-description">
-<p>Melhorando nossas visualizações!</p>
+<a href="./posts/data-116/index.html" class="no-external">Melhorando nossas visualizações!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-116/index.html">
+<a href="./posts/data-116/index.html" class="no-external">
 <div class="listing-date">
 Feb 18, 2023
 </div>
@@ -379,19 +404,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Visualização,Python,Pandas,Plotly" data-listing-date-sort="1676592000000" data-listing-file-modified-sort="1687036135340" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="5" data-categories="Visualização,Python,Pandas,Plotly" data-listing-date-sort="1676592000000" data-listing-file-modified-sort="1721754649893" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="633">
 <div class="thumbnail">
-<p><a href="./posts/data-115/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-115/index.html" class="no-external"></a></p><a href="./posts/data-115/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-115/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-115/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 15 - Gráficos Interativos
+<a href="./posts/data-115/index.html" class="no-external">[VDP] Aula 15 - Gráficos Interativos</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-115/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -406,14 +431,12 @@ Pandas
 Plotly
 </div>
 </div>
-<a href="./posts/data-115/index.html">
 <div class="listing-description">
-<p>Precisa de Interatividade? Plotly é a solução!</p>
+<a href="./posts/data-115/index.html" class="no-external">Precisa de Interatividade? Plotly é a solução!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-115/index.html">
+<a href="./posts/data-115/index.html" class="no-external">
 <div class="listing-date">
 Feb 17, 2023
 </div>
@@ -423,19 +446,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="Visualização,Python,Pandas,Bancos de Dados" data-listing-date-sort="1676505600000" data-listing-file-modified-sort="1687036135188" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="6" data-categories="Visualização,Python,Pandas,Bancos de Dados" data-listing-date-sort="1676505600000" data-listing-file-modified-sort="1721754649777" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="860">
 <div class="thumbnail">
-<p><a href="./posts/data-114/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-114/index.html" class="no-external"></a></p><a href="./posts/data-114/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-114/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-114/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 14 - Pandas e Bancos de Dados
+<a href="./posts/data-114/index.html" class="no-external">[VDP] Aula 14 - Pandas e Bancos de Dados</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-114/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -450,14 +473,12 @@ Pandas
 Bancos de Dados
 </div>
 </div>
-<a href="./posts/data-114/index.html">
 <div class="listing-description">
-<p>Maximizando o volume de dados para processar</p>
+<a href="./posts/data-114/index.html" class="no-external">Maximizando o volume de dados para processar</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-114/index.html">
+<a href="./posts/data-114/index.html" class="no-external">
 <div class="listing-date">
 Feb 16, 2023
 </div>
@@ -467,19 +488,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="Visualização,Python,Pandas,Wordcloud" data-listing-date-sort="1676419200000" data-listing-file-modified-sort="1687036135184" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="7" data-categories="Visualização,Python,Pandas,Wordcloud" data-listing-date-sort="1676419200000" data-listing-file-modified-sort="1721754649773" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="421">
 <div class="thumbnail">
-<p><a href="./posts/data-113/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-113/index.html" class="no-external"></a></p><a href="./posts/data-113/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-113/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-113/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 13 - Visualizando Wordclouds
+<a href="./posts/data-113/index.html" class="no-external">[VDP] Aula 13 - Visualizando Wordclouds</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-113/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -494,14 +515,12 @@ Pandas
 Wordcloud
 </div>
 </div>
-<a href="./posts/data-113/index.html">
 <div class="listing-description">
-<p>Extraindo significado de variáveis de texto</p>
+<a href="./posts/data-113/index.html" class="no-external">Extraindo significado de variáveis de texto</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-113/index.html">
+<a href="./posts/data-113/index.html" class="no-external">
 <div class="listing-date">
 Feb 15, 2023
 </div>
@@ -511,19 +530,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="Visualização,Python,Pandas,Sankey Chart" data-listing-date-sort="1676332800000" data-listing-file-modified-sort="1687036135160" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="8" data-categories="Visualização,Python,Pandas,Sankey Chart" data-listing-date-sort="1676332800000" data-listing-file-modified-sort="1721754649753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="351">
 <div class="thumbnail">
-<p><a href="./posts/data-112/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-112/index.html" class="no-external"></a></p><a href="./posts/data-112/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-112/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-112/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 12 - Visualizando Sankey Charts
+<a href="./posts/data-112/index.html" class="no-external">[VDP] Aula 12 - Visualizando Sankey Charts</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-112/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -538,14 +557,12 @@ Pandas
 Sankey Chart
 </div>
 </div>
-<a href="./posts/data-112/index.html">
 <div class="listing-description">
-<p>Mostrando relação entre duas variáveis categóricas</p>
+<a href="./posts/data-112/index.html" class="no-external">Mostrando relação entre duas variáveis categóricas</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-112/index.html">
+<a href="./posts/data-112/index.html" class="no-external">
 <div class="listing-date">
 Feb 14, 2023
 </div>
@@ -555,19 +572,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Visualização,Python,Pandas,Network Mapping" data-listing-date-sort="1676246400000" data-listing-file-modified-sort="1687036135160" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="9" data-categories="Visualização,Python,Pandas,Network Mapping" data-listing-date-sort="1676246400000" data-listing-file-modified-sort="1721754649753" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
 <div class="thumbnail">
-<p><a href="./posts/data-111/index.html"> <img src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-111/index.html" class="no-external"></a></p><a href="./posts/data-111/index.html" class="no-external">
+<p><img loading="lazy" src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-111/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-111/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 11 - Visualizando Mapas de Rede
+<a href="./posts/data-111/index.html" class="no-external">[VDP] Aula 11 - Visualizando Mapas de Rede</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-111/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -582,14 +599,12 @@ Pandas
 Network Mapping
 </div>
 </div>
-<a href="./posts/data-111/index.html">
 <div class="listing-description">
-<p>Demonstrando relacionamento entre elementos dos dados</p>
+<a href="./posts/data-111/index.html" class="no-external">Demonstrando relacionamento entre elementos dos dados</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-111/index.html">
+<a href="./posts/data-111/index.html" class="no-external">
 <div class="listing-date">
 Feb 13, 2023
 </div>
@@ -599,19 +614,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="Visualização,Python,Pandas,Seaborn,MatPlotLib,Boas Práticas" data-listing-date-sort="1676160000000" data-listing-file-modified-sort="1687036135148" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="10" data-categories="Visualização,Python,Pandas,Seaborn,MatPlotLib,Boas Práticas" data-listing-date-sort="1676160000000" data-listing-file-modified-sort="1721754649741" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1069">
 <div class="thumbnail">
-<p><a href="./posts/data-110/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-110/index.html" class="no-external"></a></p><a href="./posts/data-110/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-110/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-110/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 10 - Seaborn - Melhorando seus Visuais
+<a href="./posts/data-110/index.html" class="no-external">[VDP] Aula 10 - Seaborn - Melhorando seus Visuais</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-110/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -632,14 +647,12 @@ MatPlotLib
 Boas Práticas
 </div>
 </div>
-<a href="./posts/data-110/index.html">
 <div class="listing-description">
-<p>Criando gráficos com aparência profissional e que são eficientes ao comunicar resultados</p>
+<a href="./posts/data-110/index.html" class="no-external">Criando gráficos com aparência profissional e que são eficientes ao comunicar resultados</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-110/index.html">
+<a href="./posts/data-110/index.html" class="no-external">
 <div class="listing-date">
 Feb 12, 2023
 </div>
@@ -649,19 +662,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="Visualização,Python,Pandas,MatPlotLib,Gráfico de Pizza" data-listing-date-sort="1676073600000" data-listing-file-modified-sort="1687036135136" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="11" data-categories="Visualização,Python,Pandas,MatPlotLib,Gráfico de Pizza" data-listing-date-sort="1676073600000" data-listing-file-modified-sort="1721754649733" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="698">
 <div class="thumbnail">
-<p><a href="./posts/data-109/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-109/index.html" class="no-external"></a></p><a href="./posts/data-109/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-109/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-109/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 09 - Seaborn - Tudo acaba em Pizza
+<a href="./posts/data-109/index.html" class="no-external">[VDP] Aula 09 - Seaborn - Tudo acaba em Pizza</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-109/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -679,14 +692,12 @@ MatPlotLib
 Gráfico de Pizza
 </div>
 </div>
-<a href="./posts/data-109/index.html">
 <div class="listing-description">
-<p>Utilizando o Gráfico mais Polêmico da Área de Visualização de Dados</p>
+<a href="./posts/data-109/index.html" class="no-external">Utilizando o Gráfico mais Polêmico da Área de Visualização de Dados</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-109/index.html">
+<a href="./posts/data-109/index.html" class="no-external">
 <div class="listing-date">
 Feb 11, 2023
 </div>
@@ -696,19 +707,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="Visualização,Python,Pandas,Seaborn,Gráfico de Dispersão,Quadrante Mágico" data-listing-date-sort="1675987200000" data-listing-file-modified-sort="1687036135128" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="12" data-categories="Visualização,Python,Pandas,Seaborn,Gráfico de Dispersão,Quadrante Mágico" data-listing-date-sort="1675987200000" data-listing-file-modified-sort="1721754649729" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1004">
 <div class="thumbnail">
-<p><a href="./posts/data-108/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-108/index.html" class="no-external"></a></p><a href="./posts/data-108/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-108/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-108/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 08 - Dispersão e Quadrantes
+<a href="./posts/data-108/index.html" class="no-external">[VDP] Aula 08 - Dispersão e Quadrantes</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-108/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -729,14 +740,12 @@ Gráfico de Dispersão
 Quadrante Mágico
 </div>
 </div>
-<a href="./posts/data-108/index.html">
 <div class="listing-description">
-<p>Distribuição e Correlação entre Variáveis</p>
+<a href="./posts/data-108/index.html" class="no-external">Distribuição e Correlação entre Variáveis</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-108/index.html">
+<a href="./posts/data-108/index.html" class="no-external">
 <div class="listing-date">
 Feb 10, 2023
 </div>
@@ -746,19 +755,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="Visualização,Python,Pandas,Seaborn,MatPlotLib,Gráfico de Linhas,Gráfico de Áreas" data-listing-date-sort="1675900800000" data-listing-file-modified-sort="1687036135124" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="13" data-categories="Visualização,Python,Pandas,Seaborn,MatPlotLib,Gráfico de Linhas,Gráfico de Áreas" data-listing-date-sort="1675900800000" data-listing-file-modified-sort="1721754649725" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="500">
 <div class="thumbnail">
-<p><a href="./posts/data-107/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-107/index.html" class="no-external"></a></p><a href="./posts/data-107/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-107/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-107/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 07 - Linhas e Áreas
+<a href="./posts/data-107/index.html" class="no-external">[VDP] Aula 07 - Linhas e Áreas</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-107/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -782,14 +791,12 @@ Gráfico de Linhas
 Gráfico de Áreas
 </div>
 </div>
-<a href="./posts/data-107/index.html">
 <div class="listing-description">
-<p>Análise em dimensão contínua</p>
+<a href="./posts/data-107/index.html" class="no-external">Análise em dimensão contínua</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-107/index.html">
+<a href="./posts/data-107/index.html" class="no-external">
 <div class="listing-date">
 Feb 9, 2023
 </div>
@@ -799,19 +806,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="Visualização,Python,Pandas,MatPlotLib,Seaborn,Gráfico de Barras,Gráfico de Colunas" data-listing-date-sort="1675814400000" data-listing-file-modified-sort="1687036135124" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="14" data-categories="Visualização,Python,Pandas,MatPlotLib,Seaborn,Gráfico de Barras,Gráfico de Colunas" data-listing-date-sort="1675814400000" data-listing-file-modified-sort="1721754649725" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1223">
 <div class="thumbnail">
-<p><a href="./posts/data-106/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-106/index.html" class="no-external"></a></p><a href="./posts/data-106/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-106/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-106/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 06 - Iniciando com Seaborn
+<a href="./posts/data-106/index.html" class="no-external">[VDP] Aula 06 - Iniciando com Seaborn</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-106/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -835,14 +842,12 @@ Gráfico de Barras
 Gráfico de Colunas
 </div>
 </div>
-<a href="./posts/data-106/index.html">
 <div class="listing-description">
-<p>Apresentando os Gráficos de Barras!</p>
+<a href="./posts/data-106/index.html" class="no-external">Apresentando os Gráficos de Barras!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-106/index.html">
+<a href="./posts/data-106/index.html" class="no-external">
 <div class="listing-date">
 Feb 8, 2023
 </div>
@@ -852,19 +857,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="Visualização,Python,Pandas" data-listing-date-sort="1675728000000" data-listing-file-modified-sort="1687036135120" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="15" data-categories="Visualização,Python,Pandas" data-listing-date-sort="1675728000000" data-listing-file-modified-sort="1721754649721" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1753">
 <div class="thumbnail">
-<p><a href="./posts/data-105/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-105/index.html" class="no-external"></a></p><a href="./posts/data-105/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-105/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-105/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 05 - Pandas
+<a href="./posts/data-105/index.html" class="no-external">[VDP] Aula 05 - Pandas</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-105/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -876,14 +881,12 @@ Python
 Pandas
 </div>
 </div>
-<a href="./posts/data-105/index.html">
 <div class="listing-description">
-<p>Preparando dados como gente grande!</p>
+<a href="./posts/data-105/index.html" class="no-external">Preparando dados como gente grande!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-105/index.html">
+<a href="./posts/data-105/index.html" class="no-external">
 <div class="listing-date">
 Feb 7, 2023
 </div>
@@ -893,19 +896,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="Visualização,Python,Notebooks,Jupyter,Prática" data-listing-date-sort="1675641600000" data-listing-file-modified-sort="1687036135116" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9">
+<div class="quarto-post image-right" data-index="16" data-categories="Visualização,Python,Notebooks,Jupyter,Prática" data-listing-date-sort="1675641600000" data-listing-file-modified-sort="1721754649721" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1777">
 <div class="thumbnail">
-<p><a href="./posts/data-104/index.html"> <img data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-104/index.html" class="no-external"></a></p><a href="./posts/data-104/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming_practice.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-104/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-104/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 04 - Prática Aulas 2 e 3
+<a href="./posts/data-104/index.html" class="no-external">[VDP] Aula 04 - Prática Aulas 2 e 3</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-104/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -923,14 +926,12 @@ Jupyter
 Prática
 </div>
 </div>
-<a href="./posts/data-104/index.html">
 <div class="listing-description">
-<p>Consolidando o Aprendizado das Aulas 2 e 3</p>
+<a href="./posts/data-104/index.html" class="no-external">Consolidando o Aprendizado das Aulas 2 e 3</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-104/index.html">
+<a href="./posts/data-104/index.html" class="no-external">
 <div class="listing-date">
 Feb 6, 2023
 </div>
@@ -940,19 +941,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="Visualização,Python,Dados,Formato Longo,Formato Largo" data-listing-date-sort="1675555200000" data-listing-file-modified-sort="1687036135112" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="17" data-categories="Visualização,Python,Dados,Formato Longo,Formato Largo" data-listing-date-sort="1675555200000" data-listing-file-modified-sort="1721754649713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="994">
 <div class="thumbnail">
-<p><a href="./posts/data-103/index.html"> <img data-src="./posts/data-103/df_long_x_wide_form.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-103/index.html" class="no-external"></a></p><a href="./posts/data-103/index.html" class="no-external">
+<p><img loading="lazy" data-src="./posts/data-103/df_long_x_wide_form.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-103/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-103/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] Aula 03 - Formatos de Dados
+<a href="./posts/data-103/index.html" class="no-external">[VDP] Aula 03 - Formatos de Dados</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-103/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -970,14 +971,12 @@ Formato Longo
 Formato Largo
 </div>
 </div>
-<a href="./posts/data-103/index.html">
 <div class="listing-description">
-<p>Como o dado precisa ser estruturado para que possamos visualizar de maneira correta?</p>
+<a href="./posts/data-103/index.html" class="no-external">Como o dado precisa ser estruturado para que possamos visualizar de maneira correta?</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-103/index.html">
+<a href="./posts/data-103/index.html" class="no-external">
 <div class="listing-date">
 Feb 5, 2023
 </div>
@@ -987,19 +986,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="18" data-categories="Visualização,Notebooks,Jupyter" data-listing-date-sort="1675468800000" data-listing-file-modified-sort="1687036135112" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="18" data-categories="Visualização,Notebooks,Jupyter" data-listing-date-sort="1675468800000" data-listing-file-modified-sort="1721754649713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="774">
 <div class="thumbnail">
-<p><a href="./posts/data-102/index.html"> <img data-src="./posts/data-102/colab.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-102/index.html" class="no-external"></a></p><a href="./posts/data-102/index.html" class="no-external">
+<p><img loading="lazy" data-src="./posts/data-102/colab.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-102/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-102/index.html">
 <h3 class="no-anchor listing-title">
-Aula 02 - Google Colab
+<a href="./posts/data-102/index.html" class="no-external">Aula 02 - Google Colab</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-102/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -1011,14 +1010,12 @@ Notebooks
 Jupyter
 </div>
 </div>
-<a href="./posts/data-102/index.html">
 <div class="listing-description">
-<p>Conhecendo nossa ferramenta de trabalho…</p>
+<a href="./posts/data-102/index.html" class="no-external">Conhecendo nossa ferramenta de trabalho…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-102/index.html">
+<a href="./posts/data-102/index.html" class="no-external">
 <div class="listing-date">
 Feb 4, 2023
 </div>
@@ -1028,19 +1025,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="19" data-categories="Visualização,Teoria,Ciência de Dados" data-listing-date-sort="1675382400000" data-listing-file-modified-sort="1687036135108" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
+<div class="quarto-post image-right" data-index="19" data-categories="Visualização,Teoria,Ciência de Dados" data-listing-date-sort="1675382400000" data-listing-file-modified-sort="1721754649713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="943">
 <div class="thumbnail">
-<p><a href="./posts/data-101/index.html"> <img data-src="./posts/data-101/tipos_grafico.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-101/index.html" class="no-external"></a></p><a href="./posts/data-101/index.html" class="no-external">
+<p><img loading="lazy" data-src="./posts/data-101/tipos_grafico.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-101/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-101/index.html">
 <h3 class="no-anchor listing-title">
-Aula 01 - Teoria de Visualização de Dados
+<a href="./posts/data-101/index.html" class="no-external">Aula 01 - Teoria de Visualização de Dados</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-101/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -1052,14 +1049,12 @@ Teoria
 Ciência de Dados
 </div>
 </div>
-<a href="./posts/data-101/index.html">
 <div class="listing-description">
-<p>Um pouco de teoria antes de iniciar…</p>
+<a href="./posts/data-101/index.html" class="no-external">Um pouco de teoria antes de iniciar…</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-101/index.html">
+<a href="./posts/data-101/index.html" class="no-external">
 <div class="listing-date">
 Feb 3, 2023
 </div>
@@ -1069,19 +1064,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="20" data-categories="Visualização,Python,Pandas,Seaborn" data-listing-date-sort="1675296000000" data-listing-file-modified-sort="1687036135108" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
+<div class="quarto-post image-right" data-index="20" data-categories="Visualização,Python,Pandas,Seaborn" data-listing-date-sort="1675296000000" data-listing-file-modified-sort="1721754649713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="116">
 <div class="thumbnail">
-<p><a href="./posts/data-010/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="./posts/data-010/index.html" class="no-external"></a></p><a href="./posts/data-010/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/data-010/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-010/index.html">
 <h3 class="no-anchor listing-title">
-[VDP] - Introdução
+<a href="./posts/data-010/index.html" class="no-external">[VDP] - Introdução</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-010/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Visualização'); return false;">
 Visualização
@@ -1096,14 +1091,12 @@ Pandas
 Seaborn
 </div>
 </div>
-<a href="./posts/data-010/index.html">
 <div class="listing-description">
-<p>Entenda como o curso irá funcionar!</p>
+<a href="./posts/data-010/index.html" class="no-external">Entenda como o curso irá funcionar!</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-010/index.html">
+<a href="./posts/data-010/index.html" class="no-external">
 <div class="listing-date">
 Feb 2, 2023
 </div>
@@ -1113,19 +1106,19 @@ Walter R. Paixão-Côrtes
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="21" data-categories="Cursos,Python,Pandas,Seaborn" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1687036135108" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
+<div class="quarto-post image-right" data-index="21" data-categories="Cursos,Python,Pandas,Seaborn" data-listing-date-sort="1675209600000" data-listing-file-modified-sort="1721754649713" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="376">
 <div class="thumbnail">
-<p><a href="./posts/data-100/index.html"> <img data-src="./library/concepts/programming.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/data-100/index.html" class="no-external"></a></p><a href="./posts/data-100/index.html" class="no-external">
+<p><img loading="lazy" data-src="./library/concepts/programming.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/data-100/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/data-100/index.html">
 <h3 class="no-anchor listing-title">
-Visualização de Dados com Python - Sumário
+<a href="./posts/data-100/index.html" class="no-external">Visualização de Dados com Python - Sumário</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/data-100/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Cursos'); return false;">
 Cursos
@@ -1140,14 +1133,12 @@ Pandas
 Seaborn
 </div>
 </div>
-<a href="./posts/data-100/index.html">
 <div class="listing-description">
-<p>Acompanhe o curso por aqui.</p>
+<a href="./posts/data-100/index.html" class="no-external">Acompanhe o curso por aqui.</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/data-100/index.html">
+<a href="./posts/data-100/index.html" class="no-external">
 <div class="listing-date">
 Feb 1, 2023
 </div>
@@ -1206,18 +1197,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1249,11 +1229,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1263,8 +1282,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1276,7 +1304,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1320,6 +1471,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1345,6 +1497,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1405,6 +1583,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
