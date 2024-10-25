@@ -1633,9 +1633,8 @@ font-style: inherit;">2</span>])</span></code></pre></div>
  ]]></description>
   <category>Visualização</category>
   <category>Python</category>
-  <category>Dados</category>
-  <category>Formato Longo</category>
-  <category>Formato Largo</category>
+  <category>Teoria</category>
+  <category>ptbr</category>
   <guid>https://blog.wvcode.com.br/posts/data-103/</guid>
   <pubDate>Sun, 05 Feb 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/posts/data-103/df_long_x_wide_form.png" medium="image" type="image/png" height="99" width="144"/>
@@ -2239,8 +2238,9 @@ Note
 
  ]]></description>
   <category>Visualização</category>
-  <category>Notebooks</category>
-  <category>Jupyter</category>
+  <category>Python</category>
+  <category>Google Colab</category>
+  <category>ptbr</category>
   <guid>https://blog.wvcode.com.br/posts/data-102/</guid>
   <pubDate>Sat, 04 Feb 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/posts/data-102/colab.png" medium="image" type="image/png" height="89" width="144"/>
@@ -2340,14 +2340,16 @@ Note
 
  ]]></description>
   <category>Visualização</category>
+  <category>Python</category>
   <category>Teoria</category>
   <category>Ciência de Dados</category>
+  <category>ptbr</category>
   <guid>https://blog.wvcode.com.br/posts/data-101/</guid>
   <pubDate>Fri, 03 Feb 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/posts/data-101/tipos_grafico.png" medium="image" type="image/png" height="161" width="144"/>
 </item>
 <item>
-  <title>[VDP] - Introdução</title>
+  <title>Introdução</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
   <link>https://blog.wvcode.com.br/posts/data-010/</link>
   <description><![CDATA[ 
@@ -2377,7 +2379,6 @@ Note
   <category>Visualização</category>
   <category>Python</category>
   <category>Pandas</category>
-  <category>Seaborn</category>
   <guid>https://blog.wvcode.com.br/posts/data-010/</guid>
   <pubDate>Thu, 02 Feb 2023 00:00:00 GMT</pubDate>
 </item>
