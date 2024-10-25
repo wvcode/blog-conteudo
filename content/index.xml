@@ -12850,7 +12850,7 @@ Note
   <media:content url="https://blog.wvcode.com.br/posts/data-102/colab.png" medium="image" type="image/png" height="89" width="144"/>
 </item>
 <item>
-  <title>Aula 01 - Teoria de Visualização de Dados</title>
+  <title>Parte 01 - Teoria de Visualização de Dados</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
   <link>https://blog.wvcode.com.br/posts/data-101/</link>
   <description><![CDATA[ 
@@ -12861,8 +12861,8 @@ Note
 
 <section id="introdução" class="level3">
 <h3 class="anchored" data-anchor-id="introdução">Introdução</h3>
-<p>Olá Cientista de Dados!</p>
-<p>Na primeira aula deste curso, vamos aprender um pouco de teoria sobre Visualização e Ciência de Dados, com o objetivo de compreendermos a importância da Visualização de Dados dentro da Ciência de Dados.</p>
+<p>Olá Devs!</p>
+<p>Na primeira parte desta série, vamos aprender um pouco de teoria sobre Visualização e Ciência de Dados, com o objetivo de compreendermos a importância da Visualização de Dados dentro da Ciência de Dados.</p>
 </section>
 <section id="o-que-é-ciência-de-dados" class="level3">
 <h3 class="anchored" data-anchor-id="o-que-é-ciência-de-dados">O que é Ciência de Dados</h3>
@@ -12931,25 +12931,12 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Então, agora que toda a teoria necessária está explicada, bora trabalhar??? Na próxima aula, iremos aprender sobre o Google Colab, a ferramenta que escolhemos para conduzir o restante deste curso! <a href="../../posts/data-102/index.html">Aula 002 - Google Colab</a></p>
+<p>Então, agora que toda a teoria necessária está explicada, bora trabalhar??? Na Parte 02, iremos aprender sobre o Google Colab, a ferramenta que escolhemos para conduzir o restante desta série! <a href="../../posts/data-102/index.html">Parte 02 - Google Colab</a></p>
 </div>
 </div>
+
+
 </section>
-</section>
-<section id="navegação" class="level3">
-<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><a href="../../posts/data-010/index.html">&lt; Anterior</a></th>
-<th>|</th>
-<th style="text-align: right;"><a href="../../posts/data-102/index.html">Próximo &gt;</a></th>
-</tr>
-</thead>
-
-</table>
-
-
 </section>
 
  ]]></description>
@@ -12970,31 +12957,18 @@ Note
 
 
 
-<p>Olá Cientista de Dados!!!</p>
-<p>O curso de Visualização de Dados com Python tem por objetivo habilitar os alunos (e futuros Cientistas de Dados) a utilizar a linguagem Python para:</p>
+<p>Olá Devs!!!</p>
+<p>A série de Visualização de Dados com Python tem por objetivo habilita-los a utilizar a linguagem Python para:</p>
 <ul>
 <li>realizar análises de dados em grandes volumes e nos mais diferentes formatos</li>
 <li>criar gráficos que transmitam a informação de maneira agradável e direta</li>
 <li>aprender sobre tipos de visualização de dados que vão além dos gráficos de barras, linhas e tortas.</li>
 </ul>
-<p>Ao longo do curso você irá aprender a utilizar algumas das bibliotecas Python mais famosas na área de Ciência de Dados: Requests, Pandas, Seaborn, MatplotLib, Plotly e muito mais.</p>
-<p>Então, não perca mais tempo e comece o curso agora mesmo!</p>
+<p>Ao longo dos posts você irá aprender a utilizar algumas das bibliotecas Python mais famosas na área de Ciência de Dados: Requests, Pandas, Seaborn, MatplotLib, Plotly e muito mais.</p>
+<p>Então, não perca mais tempo e comece a leitura agora mesmo!</p>
 <p>Um abraço, Walter.</p>
-<section id="navegação" class="level3">
-<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th>Anterior</th>
-<th>|</th>
-<th style="text-align: right;"><a href="../../posts/data-101/index.html">Próximo &gt;</a></th>
-</tr>
-</thead>
-
-</table>
 
 
-</section>
 
  ]]></description>
   <category>Visualização</category>
