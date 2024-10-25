@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-02-04">
 <meta name="description" content="Conhecendo nossa ferramenta de trabalho…">
 
-<title>Aula 02 - Google Colab – WV Code - Educação e Consultoria</title>
+<title>Parte 02 - Google Colab – WV Code - Educação e Consultoria</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -168,7 +168,7 @@ background-size: cover;
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Aula 02 - Google Colab</h1>
+      <h1 class="title">Parte 02 - Google Colab</h1>
                   <div>
         <div class="description">
           Conhecendo nossa ferramenta de trabalho…
@@ -211,13 +211,11 @@ background-size: cover;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a></li>
-  <li><a href="#o-que-é-o-google-colab" id="toc-o-que-é-o-google-colab" class="nav-link" data-scroll-target="#o-que-é-o-google-colab">O que é o Google Colab?</a></li>
+  <li><a href="#o-que-é-o-google-colab" id="toc-o-que-é-o-google-colab" class="nav-link active" data-scroll-target="#o-que-é-o-google-colab">O que é o Google Colab?</a></li>
   <li><a href="#como-acessamos-o-google-colab" id="toc-como-acessamos-o-google-colab" class="nav-link" data-scroll-target="#como-acessamos-o-google-colab">Como acessamos o Google Colab?</a></li>
   <li><a href="#iniciando-um-novo-notebook" id="toc-iniciando-um-novo-notebook" class="nav-link" data-scroll-target="#iniciando-um-novo-notebook">Iniciando um novo notebook!</a></li>
   <li><a href="#utilizando-um-notebook" id="toc-utilizando-um-notebook" class="nav-link" data-scroll-target="#utilizando-um-notebook">Utilizando um notebook</a></li>
   <li><a href="#finalizando" id="toc-finalizando" class="nav-link" data-scroll-target="#finalizando">Finalizando</a></li>
-  <li><a href="#navegação" id="toc-navegação" class="nav-link" data-scroll-target="#navegação">Navegação</a></li>
   </ul>
 </nav>
     </div>
@@ -228,12 +226,9 @@ background-size: cover;
 
 
 
-<section id="introdução" class="level3">
-<h3 class="anchored" data-anchor-id="introdução">Introdução</h3>
-<p>Olá Cientista de Dados!</p>
-<p>Nesta aula vamos conhecer o Google Colab, e entender como utiliza-lo em nossas tarefas de Análise e Visualização de Dados.</p>
+<p>Olá Devs!</p>
+<p>Hoje iremos conhecer o Google Colab, e entender como utiliza-lo em nossas tarefas de Análise e Visualização de Dados.</p>
 <p>Vamos lá?</p>
-</section>
 <section id="o-que-é-o-google-colab" class="level3">
 <h3 class="anchored" data-anchor-id="o-que-é-o-google-colab">O que é o Google Colab?</h3>
 <p>O Google Colab é uma plataforma de computação em nuvem gratuita baseada no <a href="https://jupyter.org/">Jupyter Notebook</a>. Ele permite que os usuários criem e compartilhem documentos que contenham código executável, equações, visualizações e texto explicativo. O Google Colab oferece suporte a várias linguagens de programação populares, incluindo Python, JavaScript e Swift.</p>
@@ -278,7 +273,7 @@ background-size: cover;
 <section id="células-de-código" class="level4">
 <h4 class="anchored" data-anchor-id="células-de-código">Células de Código</h4>
 <p>Células de código, como o próprio nome diz, servem para escrever código que será executado. Podemos usar algumas linguagens, sendo que a mais comum é Python. Cada célula, ao ser executada, pode imprimir o resultado de sua execução logo abaixo. Veja um exemplo abaixo:</p>
-<div id="cell-18" class="cell" data-execution_count="1">
+<div id="cell-17" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> json</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
@@ -746,7 +741,7 @@ background-size: cover;
 <p>Os exemplos acima são bons para mostrar cada parte separadamente, mas vamos a um exemplo que irá ilustrar a utilização típica destes blocos.</p>
 <section id="exemplo" class="level4">
 <h4 class="anchored" data-anchor-id="exemplo">Exemplo</h4>
-<p>Digamos que você precisa entregar um relatório para o professor sobre quais são os primeiros 1000 números primos. Ele também solicita que você explique o que são números primos e como descobrir se um número é primo ou não.</p>
+<p>Digamos que você precisa entregar um relatório para o seu chefe sobre quais são os primeiros 1000 números primos. Ele também solicita que você explique o que são números primos e como descobrir se um número é primo ou não.</p>
 <p>Em um cenário tradicional de programação, provavelmente se faria a entrega de pelo menos dois arquivos: um documento do word, por exemplo, com a parte descritiva e um arquivo de código-fonte com o código. Como o arquivo de código-fonte não guarda o resultado da execução, é muito provável que este resultado fosse adicionado ao documento do word, ou quem sabe, disponibilizado em um terceiro arquivo.</p>
 <p>Dá um certo trabalho preparar tudo… Além precisar de um computador com Word e com um editor de código-fonte para fazer todo o relatório. Mas com o Google Colab, você pode fazer tudo em um único lugar: um notebook pode ser editado de qualquer lugar, através do browser!</p>
 <p>Veja o resultado abaixo:</p>
@@ -777,22 +772,11 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Os artigos citado acima e o conteúdo apresentado nesta aula não são de maneira nenhuma uma revisão extensiva do Google Colab, apresentamos apenas o necessário para você andar com seus próprios pés e no seu ritmo!</p>
+<p>Os artigos citado acima e o conteúdo apresentado neste artigo não são de maneira nenhuma uma revisão extensiva do Google Colab, apresentamos apenas o necessário para você andar com seus próprios pés e no seu ritmo!</p>
 </div>
 </div>
-</section>
-<section id="navegação" class="level3">
-<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><a href="../../posts/data-101/index.html">&lt; Anterior</a></th>
-<th>|</th>
-<th style="text-align: right;"><a href="../../posts/data-103/index.html">Próximo &gt;</a></th>
-</tr>
-</thead>
-
-</table>
+<p>Um abraço, e até a próxima!</p>
+<p>Walter.</p>
 
 
 </section>
