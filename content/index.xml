@@ -12,7 +12,7 @@
 <generator>quarto-1.5.57</generator>
 <lastBuildDate>Fri, 16 Jun 2023 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>AI na Análise de Dados - 1 - Classificação de Texto com a API da OpenAI</title>
+  <title>AI na Análise de Dados - Classificação de Texto com a API da OpenAI</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
   <link>https://blog.wvcode.com.br/posts/p0004-classif-texto/</link>
   <description><![CDATA[ 
@@ -812,6 +812,10 @@ font-style: inherit;"># Render the new report</span></span>
 <p>Desde outubro do ano passado, com a liberação do ChatGPT 3.5, as interfaces conversacionais vem se popularizando de maneira muito rápida. É verdade que interfaces conversacionais não são novidade, e chatbots e assistentes virtuais vem dominando tarefas relacionadas a atendimento de clientes, mas desde o advento do ChatGPT, tem-se expandido para outras áreas de atuação.</p>
 <p>Utilizamos o ChatGPT para criarmos resumos de textos longos, para consultar algo que ocorreu no passado, explicar conceitos e por aí vai. Já existem cursos que ensinam como utilizar o ChatGPT para criar campanhas de marketing nas redes sociais e outras tantas funções que são basicamente apoiadas em texto.</p>
 <p>Dentro da programação, é possível gerar pequenos trechos de código e até páginas HTML e arquivos CSS inteiros.</p>
+<section id="status-outubro2024" class="level3">
+<h3 class="anchored" data-anchor-id="status-outubro2024">Status Outubro/2024</h3>
+<p>Se você não estava embaixo de uma pedra, certamente já sabe que as LLMs vigentes são muito boas em análise de dados, gerando códigos muito bons, inclusive para alguns casos mais complexos. No entanto, o conteúdo deste artigo ainda tem relevância, pois mostra uma das muitas maneiras de integrar uma LLM ao processo de análise de dados.</p>
+</section>
 </section>
 <section id="e-o-que-isso-tem-a-ver-com-ciências-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="e-o-que-isso-tem-a-ver-com-ciências-de-dados">E o que isso tem a ver com Ciências de Dados?</h2>
@@ -1320,6 +1324,321 @@ font-style: inherit;">"Plote um gráfico de pizza totalizando pokemons pelo camp
   <guid>https://blog.wvcode.com.br/posts/p0002-pandasai/</guid>
   <pubDate>Mon, 29 May 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/posts/p0002-pandasai/panda-001.png" medium="image" type="image/png" height="144" width="144"/>
+</item>
+<item>
+  <title>Parte 03 - Formatos de Dados</title>
+  <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
+  <link>https://blog.wvcode.com.br/posts/data-103/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Olá Devs!</p>
+<p>Neste artigo, vamos aprender um pouco mais sobre os formatos utilizados para armazenar os dados que nossas visualizações irão consumir.</p>
+<section id="fontes-de-dados-e-seus-formatos" class="level3">
+<h3 class="anchored" data-anchor-id="fontes-de-dados-e-seus-formatos">Fontes de dados e seus formatos</h3>
+<p>Para realizarmos nossas tarefas como Cientistas de Dados, é necessário que acessemos aquilo que nos é mais caro, o nosso combustível: os dados.</p>
+<p>Estes dados vem das mais diversas fontes: websites, dispositivos IoT, bancos de dados, documentos, … Estas diferentes fontes significam que os dados possuem diferentes formatos, e uma de nossas tarefas é transformar este dado em um formato com o qual seja possível trabalhar e gerar os resultados esperados.</p>
+<p>Dentro da área de Ciência da Computação, o formato mais utilizado para servir como base para o processamento de informação é o formato tabular.</p>
+<section id="formato-tabular" class="level4">
+<h4 class="anchored" data-anchor-id="formato-tabular">Formato Tabular</h4>
+<p>O formato tabular é utilizado para descrever uma estrutura de dados organizada em linhas e colunas, formando uma tabela. É um formato muito utilizado em bancos de dados relacionais e em arquivos CSV (Comma-Separated Values), onde cada linha representa um registro ou observação e cada coluna representa uma variável ou campo. Esse formato é muito útil para representar dados estruturados de forma clara e organizada, permitindo a fácil manipulação e análise dos dados.</p>
+<p>Abaixo, temos um exemplo prático de como podemos utilizar Python para carregar um arquivo CSV em nosso notebook.</p>
+<div id="cell-6" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> csv</span>
+<span id="cb1-2"></span>
+<span id="cb1-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Abre o arquivo CSV em modo leitura</span></span>
+<span id="cb1-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">open</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'exemplo.csv'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'r'</span>) <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> arquivo_csv:</span>
+<span id="cb1-5">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Cria um objeto para ler o arquivo CSV</span></span>
+<span id="cb1-6">    leitor_csv <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> csv.reader(arquivo_csv, delimiter<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">','</span>)</span>
+<span id="cb1-7"></span>
+<span id="cb1-8">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Percorre as linhas do arquivo CSV</span></span>
+<span id="cb1-9">    <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span> linha <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> leitor_csv:</span>
+<span id="cb1-10">        <span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(linha)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['Nome', 'Idade', 'Cidade']
+['Maria', '25', 'São Paulo']
+['João', '30', 'Rio de Janeiro']
+['Ana', '20', 'Belo Horizonte']
+['Andre', '23', 'Porto Alegre']</code></pre>
+</div>
+</div>
+<p>Neste exemplo, utilizamos a função open para abrir o arquivo CSV em modo leitura e, em seguida, criamos um objeto csv.reader para ler o arquivo CSV. Utilizamos o parâmetro delimiter para indicar o caractere separador utilizado no arquivo CSV (no caso, a vírgula). Em seguida, utilizamos um loop for para percorrer as linhas do arquivo CSV e imprimir cada uma delas na tela.</p>
+<p>Note que, neste exemplo, o resultado é uma lista de listas, onde cada lista interna representa uma linha do arquivo CSV. Para manipular os dados, é necessário fazer a conversão manualmente para o formato desejado.</p>
+<p>E, apesar deste formato ser adequado ao processamento dos dados para visualização, ainda precisamos fazer alguns ajustes até chegar ao formato ideal.</p>
+</section>
+</section>
+<section id="otimizando-o-formato-tabular" class="level3">
+<h3 class="anchored" data-anchor-id="otimizando-o-formato-tabular">Otimizando o Formato Tabular</h3>
+<p>O formato tabular padrão também pode ser referenciado pelo termo ‘Formato Largo’ (Wide format em inglês), por sua característica de organização em linhas e colunas, com a linha sendo uma observação e as colunas sendo as variáveis da observação. Isto pode ser percebido pelo formato que nossos código percorrem os arquivos ou selecionam a informação de um banco de dados: sempre pensando em extrair linhas que depois são usadas em algum tipo de processamento. Isso gera o que chamamos de overhead no processamento, porque por vezes precisamos apenas fazer o processamento de uma coluna de dados, mas somos obrigados a acessar todas as colunas para depois selecionar a coluna que queremos.</p>
+<p>Para resolver essa questão, foi criado um caso especial de formato tabular, o chamado ‘Formato Longo’ (Long format em inglês), onde a orientação da organização dos dados é colunas e linhas, ou seja, podemos acessar uma coluna individualmente, com todas as suas linhas.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-103/df_long_x_wide_form.png" class="img-fluid figure-img"></p>
+<figcaption>Formato Longo X Formato Largo</figcaption>
+</figure>
+</div>
+<p>Em Python e em muitas outras linguagens de programação que são utilizadas para Ciência de Dados, o formato tabular é representado por estruturas de dados especiais, chamadas de <code>DataFrames</code> e <code>Series</code>.</p>
+<p>Mas antes de explicar em mais detalhes essas estruturas, vamos conhecer um pouco das suas origens.</p>
+</section>
+<section id="dicionários-e-listas" class="level3">
+<h3 class="anchored" data-anchor-id="dicionários-e-listas">Dicionários e Listas</h3>
+<p>Se você já conhece o básico de Python, já aprendeu que temos os tipos de dados conhecidos como listas e dicionário de dados. Com estes tipos, podemos representar dados mais complexos, como uma sequência ou um objeto, que são compostos de vários tipos simples. Se você quiser aprender mais sobre listas e dicionários, vá para o final deste notebook.</p>
+<p>Em Python, a representação de dados no formato tabular, seja longo ou largo, passa pela combinação destes dois tipos de dados.</p>
+<section id="representação-em-python-do-formato-largo" class="level4">
+<h4 class="anchored" data-anchor-id="representação-em-python-do-formato-largo">Representação em Python do Formato Largo</h4>
+<p>Para criar um objeto em Python que represente um conjunto de dados no Formato Largo, é necessário montar uma lista de dicionários.</p>
+<div id="cell-16" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">dados_largos <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> [</span>
+<span id="cb3-2">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codigo"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jose"</span>},</span>
+<span id="cb3-3">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codigo"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Maria"</span>},</span>
+<span id="cb3-4">    {<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codigo"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>: <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fernandez"</span>}</span>
+<span id="cb3-5">]</span></code></pre></div>
+</div>
+<p>Neste objeto, temos uma lista que contém 3 elementos. Cada elemento é um dicionário com dois campos. Conforme explicamos anteriormente, no formato largo, para acessar o nome de uma pessoa, precisamos identificar em que linha ela está. Para identificar a linha, percorremos nossa lista. Para inspecionar o nome, recuperamos todo o dicionário que está naquela posição da lista.</p>
+</section>
+<section id="representação-em-python-do-formato-longo" class="level4">
+<h4 class="anchored" data-anchor-id="representação-em-python-do-formato-longo">Representação em Python do Formato Longo</h4>
+<p>Para criar um objeto em Python que represente um conjunto de dados no Formato Longo, é necessário montar um dicionário de listas.</p>
+<div id="cell-20" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">dados_longos <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> {</span>
+<span id="cb4-2">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"codigo"</span>: [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>,<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>], </span>
+<span id="cb4-3">                <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>: [<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Jose"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Maria"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fernandez"</span>]</span>
+<span id="cb4-4">               }</span></code></pre></div>
+</div>
+<p>Neste objeto, temos o dicionário com seus campos, e cada campo é uma lista com os valores para cada linha.</p>
+</section>
+<section id="entendendo-a-diferença" class="level4">
+<h4 class="anchored" data-anchor-id="entendendo-a-diferença">Entendendo a diferença</h4>
+<p>Vamos ver um exemplo prático para entender a diferença entre os dois. Acompanhe no código abaixo e leia os comentários.</p>
+<div id="cell-24" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Queremos saber o nome do usuário que está na segunda linha do nosso conjunto de dados.</span></span>
+<span id="cb5-2"></span>
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Formato largo</span></span>
+<span id="cb5-4"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(dados_largos[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>][<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>]) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># utilizamos o indice 1 porque em Python listas começam no indice 0</span></span>
+<span id="cb5-5"></span>
+<span id="cb5-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Formato longo</span></span>
+<span id="cb5-7"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(dados_longos[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># apenas invertemos a referência - primeiro a coluna, depois a linha</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maria
+Maria</code></pre>
+</div>
+</div>
+<p>A diferença parece pouca, certo? Apenas invertemos como os indices são acessados, onde está a tal otimização?</p>
+<p>A otimização está no fato de que, ao acessar a linha de um dado no formato largo, estamos acessando todas as colunas de informação daquela linha.</p>
+<div id="cell-26" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(dados_largos[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'codigo': 2, 'nome': 'Maria'}</code></pre>
+</div>
+</div>
+<p>Já no formato longo, antes de especificar a linha, eu preciso referenciar a coluna, portanto, sempre terei apenas um valor.</p>
+<div id="cell-28" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(dados_longos[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"nome"</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maria</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="dataframes-e-series" class="level3">
+<h3 class="anchored" data-anchor-id="dataframes-e-series">DataFrames e Series</h3>
+<p>O DataFrame e as Series são dois dos principais conceitos utilizados para trabalhar com dados em Python. Ambos estão presentes na biblioteca Pandas, que é uma das ferramentas mais usadas para análise de dados.</p>
+<p>O DataFrame é um objeto que tem como base o conceito de dicionário de listas, onde as listas são representadas por Series. O DataFrame adiciona uma série de funcionalidades ao dicionário de listas, simplificando a manipulação dos mesmos.</p>
+<p>Exemplo de código:</p>
+<div id="cell-31" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd </span>
+<span id="cb11-2">df <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.DataFrame([[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>], [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>], [<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">7</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">9</span>]]) </span>
+<span id="cb11-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(df[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>][<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>9</code></pre>
+</div>
+</div>
+<p>A Series é uma lista com superpoderes. Assim como o DataFrame, a Series acrescenta muitas facilidades para manipular a lista. Exemplo de código:</p>
+<div id="cell-33" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd </span>
+<span id="cb13-2">s <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.Series([<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>]) </span>
+<span id="cb13-3"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">print</span>(s[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>])</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>Além do Pandas existem outras bibliotecas que utilizam esses conceitos para trabalhar com dados como NumPy (Numerical Python), SciPy (Scientific Python) e Scikit-learn (Machine Learning).</p>
+</section>
+<section id="finalizando" class="level3">
+<h3 class="anchored" data-anchor-id="finalizando">Finalizando</h3>
+<p>Neste artigo, aprendemos sobre os formatos de dados que podemos utilizar em nossas visualizações e conhecemos mais detalhes dos DataFrames e Series.</p>
+<p>Aqui temos alguns links sobre o assunto: - <a href="https://docs.python.org/3/library/stdtypes.html#list">Listas</a> - <a href="https://docs.python.org/3/library/stdtypes.html#mapping-types-dict">Dicionários</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>Visualização</category>
+  <category>Python</category>
+  <category>Dados</category>
+  <category>Formato Longo</category>
+  <category>Formato Largo</category>
+  <guid>https://blog.wvcode.com.br/posts/data-103/</guid>
+  <pubDate>Sun, 05 Feb 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://blog.wvcode.com.br/posts/data-103/df_long_x_wide_form.png" medium="image" type="image/png" height="99" width="144"/>
 </item>
 <item>
   <title>Parte 02 - Google Colab</title>
