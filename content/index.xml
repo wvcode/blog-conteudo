@@ -1326,6 +1326,729 @@ font-style: inherit;">"Plote um gráfico de pizza totalizando pokemons pelo camp
   <media:content url="https://blog.wvcode.com.br/posts/p0002-pandasai/panda-001.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
+  <title>Parte 06 - Linhas e Áreas</title>
+  <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
+  <link>https://blog.wvcode.com.br/posts/data-107/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="introdução" class="level2">
+<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
+<p>Olá Cientista de Dados!</p>
+<p>Na última aula, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.</p>
+<p>Mais especificamente, aprendemos a criar gráficos de barras e suas variações como o gráfico de colunas, barras agrupadas ou até mesmo empilhadas (stacked). Esses gráficos correspondem com certeza à maior parte da nossa necessidade em termos de gráficos, mas ainda temos outra categoria que é muito importante: os gráficos de Linhas e Áreas.</p>
+<section id="gráficos-de-linhas-e-áreas" class="level3">
+<h3 class="anchored" data-anchor-id="gráficos-de-linhas-e-áreas">Gráficos de Linhas e Áreas</h3>
+<p>Os gráficos de Linhas e Áreas são utilizados quando precisamos representar a distribuição de métrica ao longo de um eixo de valores categóricos mas contínuos. O exemplo mais clássico é representar a distribuição de valores ao longo da dimensão do tempo. Mas também é possível utilizar qualquer outra dimensão numérica e contínua.</p>
+<p>Então, estão preparados para mais uma dose de conhecimento?</p>
+</section>
+</section>
+<section id="preparação" class="level2">
+<h2 class="anchored" data-anchor-id="preparação">Preparação</h2>
+<p>A primeira coisa que iremos fazer no nosso notebook é carregar todas as bibliotecas que iremos utilizar e também o nosso conjunto de dados.</p>
+<div id="cell-5" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span>
+<span id="cb1-2"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span>
+<span id="cb1-3"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb1-4"></span>
+<span id="cb1-5">pokemons <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pokemons.csv'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="utilização-básica" class="level2">
+<h2 class="anchored" data-anchor-id="utilização-básica">Utilização Básica</h2>
+<p>A utilização básica aqui não é muito diferente do que fizemos para os gráficos de barra: temos uma função que deve poder gerar a visualização, através da passagem de alguns parâmetros básicos: fonte de dados, eixo X, Y, …</p>
+<p>Neste caso, a função em questão é a <code>lineplot()</code>. Vamos tentar?</p>
+<div id="cell-8" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1">sns.lineplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spe'</span>)</span>
+<span id="cb2-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Variação de Velocidade de acordo com as Gerações'</span>)</span>
+<span id="cb2-3">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb2-4">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Velocidade'</span>)</span>
+<span id="cb2-5">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-107/index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Padronização é uma maravilha, não é mesmo? Pegamos o nosso código para gráficos de barras e trocamos a função e tudo funcionou! Podemos perceber, no entanto, que a nossa linha representando está envolta por um delimitador azulado. Para resolver isso, vamos dar uma analisada nos parâmetros específicos da função <code>lineplot()</code>.</p>
+<p>Por padrão, o gráfico de linhas também plota o que chamamos de error band, ou margem de erro. Se não for interessante, podemos eliminar essa error band.</p>
+<div id="cell-10" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1">sns.lineplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spe'</span>, errorbar<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>)</span>
+<span id="cb3-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Variação de Velocidade de acordo com as Gerações'</span>)</span>
+<span id="cb3-3">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb3-4">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Velocidade'</span>)</span>
+<span id="cb3-5">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-107/index_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>E, assim como no gráfico de barras, temos a necessidade de plotar mais de uma série no nosso gráfico de linhas. Como fazemos isso? É simples:</p>
+<div id="cell-12" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">pokemons_sb <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spa'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spd'</span>]] <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Primeiro selecionamos apenas as colunas que queremos trabalhar</span></span>
+<span id="cb4-2">tidy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons_sb.melt(id_vars<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>).rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>.title)</span>
+<span id="cb4-3"></span>
+<span id="cb4-4">sns.lineplot(tidy, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Value'</span>, hue<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Variable'</span>, errorbar<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">None</span>)</span>
+<span id="cb4-5">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Análise das Gerações'</span>)</span>
+<span id="cb4-6">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb4-7">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Atributos'</span>)</span>
+<span id="cb4-8">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-107/index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Basicamente, tivemos que fazer a mesma operação que fizemos para as múltiplas barras. E o resto do código já é bem conhecido.</p>
+<p>O outro tipo de gráfico baseado em linhas é o popular gráfico de área. Mas somente conseguimos gerar esse gráfico utilizando a função <code>stackplot()</code> do MatplotLib. Veja o exemplo abaixo:</p>
+<div id="cell-15" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1">pokemons_gb <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons.groupby([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>])[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spa'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spd'</span>]].mean().reset_index()</span>
+<span id="cb5-2"></span>
+<span id="cb5-3">plt.stackplot(pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>], pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spa'</span>], pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Spd'</span>], labels<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Special Attack'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Special Defense'</span>])</span>
+<span id="cb5-4">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Análise das Gerações'</span>)</span>
+<span id="cb5-5">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb5-6">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Atributos'</span>)</span>
+<span id="cb5-7">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-107/index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>E aí está o nosso gráfico de área! Mais uma vez, recorremos a matplotlib para concluir a plotagem.</p>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>Nesta aula, aprendemos a criar mais dois tipos de gráfico: linha e área, revisamos a utilização de pandas para transformar os dados e acrescentamos mais uma ferramenta no nosso cinto de utilidades.</p>
+<p>Se você quiser aprender mais sobre gráficos de linha e área em seaborn, seguem alguns links: - <a href="https://seaborn.pydata.org/introduction.html#introduction">Documentação oficial do Seaborn em português</a>: A documentação oficial do Seaborn tem uma versão em português que fornece uma visão geral da biblioteca, exemplos de uso, informações sobre os diferentes tipos de gráficos, e muito mais - <a href="https://morioh.com/p/4eda0350366b">Gráficos de Linha em Seaborn</a></p>
+<p>Na próxima aula, iremos explorar os gráficos de dispersão e pontos.</p>
+<section id="navegação" class="level3">
+<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><a href="../../posts/data-106/index.html">&lt; Anterior</a></th>
+<th>|</th>
+<th style="text-align: right;"><a href="../../posts/data-108/index.html">Próximo &gt;</a></th>
+</tr>
+</thead>
+
+</table>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>Visualização</category>
+  <category>Python</category>
+  <category>Pandas</category>
+  <category>Seaborn</category>
+  <category>MatPlotLib</category>
+  <guid>https://blog.wvcode.com.br/posts/data-107/</guid>
+  <pubDate>Thu, 09 Feb 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://blog.wvcode.com.br/library/concepts/programming_practice.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
+  <title>Parte 05 - Iniciando com Seaborn</title>
+  <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
+  <link>https://blog.wvcode.com.br/posts/data-106/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Olá Devs!</p>
+<p>Bem-vindo de volta! Na Parte 04 aprendemos como utilizar a biblioteca Pandas para carregar no notebook os dados que pretendemos trabalhar. Também aprendemos a utilizar algumas funções mais avançadas que nos permitem filtrar ou agregar informações em nosso conjunto de dados.</p>
+<p>A linguagem Python possui inúmeras bibliotecas não-nativas para gerar visualizações de dados. A biblioteca mais famosa e que muitas vezes serve de base para as outras se chama <strong>matplotlib</strong>. Por uma questão de conveniência e facilidade de uso, utilizaremos no curso a biblioteca <strong>seaborn</strong>.</p>
+<p>As principais vantagens do seaborn são: - <strong>interface alto nível</strong> - existe uma função para cada tipo de gráfico, e permite fazer chaining de chamadas - <strong>facilidade de configuração</strong> - possui objetos de configuração globais e locais (em cada gráfico).</p>
+<p>Nesta aula, vamos passar pelo processo de instalação e utilização dos tipos de gráficos mais básicos no seaborn.</p>
+<section id="instalação" class="level2">
+<h2 class="anchored" data-anchor-id="instalação">Instalação</h2>
+<p>Assim como no artigo de Pandas, tenho uma boa notícia: no Google Colab o seaborn já vem instalado no nosso ambiente! Mas caso você esteja também se aventurando em fazer este curso no VS Code, PyCharm, Sublime ou até mesmo Notepad, o comando para instalar a biblioteca seaborn é o seguinte:</p>
+<pre class="shell"><code>(venv) $ pip install seaborn</code></pre>
+</section>
+<section id="visualizando-com-seaborn" class="level2">
+<h2 class="anchored" data-anchor-id="visualizando-com-seaborn">Visualizando com seaborn</h2>
+<p>Agora vamos ver na prática como o seaborn funciona. Neste artigo, veremos os tipos de gráficos mais comuns, indicando sua utilização e dando exemplos. Se você quiser mais detalhes, sempre pode consultar a documentação do seaborn em <a href="https://seaborn.pydata.org/index.html">Seaborn Docs</a>.</p>
+<p>Hoje vamos gerar gráficos de barras ou colunas, baseados nas funções: <code>countplot()</code> e <code>barplot()</code>. Nas partes seguintes do artigo, iremos explorar outros tipos de gráficos, que são um pouco mais avançados.</p>
+<section id="inicializando-o-seaborn" class="level3">
+<h3 class="anchored" data-anchor-id="inicializando-o-seaborn">Inicializando o seaborn</h3>
+<p>Como toda a biblioteca python, precisamos indicar em nosso script quando queremos utilizar a biblioteca seaborn. Fazemos isso através do comando <code>import</code>.</p>
+<div id="cell-9" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> seaborn <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> sns</span></code></pre></div>
+</div>
+<p>Da mesma forma que falamos na aula de Pandas, o import do seaborn geralmente utiliza o apelido de sns, que pode ser encontrado em muitos artigos na internet. Vamos manter essa convenção para que vocês se acostumem ao procurar material de apoio.</p>
+<p>Por falar de Pandas, precisamos carregar ele também, afinal, precisamos dos nossos dados!</p>
+<div id="cell-11" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> pandas <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> pd</span></code></pre></div>
+</div>
+</section>
+<section id="carregando-os-dados" class="level3">
+<h3 class="anchored" data-anchor-id="carregando-os-dados">Carregando os dados</h3>
+<p>E vamos continuar nossas demonstrações com o conjunto de dados de pokemons:</p>
+<div id="cell-14" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1">pokemons <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pd.read_csv(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pokemons.csv'</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="gráficos-de-barras-ou-colunas" class="level3">
+<h3 class="anchored" data-anchor-id="gráficos-de-barras-ou-colunas">Gráficos de barras ou colunas</h3>
+<p>Um gráfico de barras ou colunas é uma representação gráfica de dados em que as informações são exibidas em barras verticais ou horizontais de comprimentos variáveis. Cada barra ou coluna representa uma categoria ou conjunto de dados diferentes, e a altura ou comprimento da barra é proporcional à quantidade ou valor correspondente.</p>
+<p>Os gráficos de barras são frequentemente usados para comparar quantidades ou valores entre diferentes categorias, enquanto os gráficos de colunas são mais adequados para exibir uma série temporal de dados. Ambos os tipos de gráficos podem ser usados para exibir dados discretos ou contínuos, e podem ser personalizados para incluir rótulos, legendas e outras informações relevantes. Os gráficos de barras e colunas são comumente usados em relatórios, apresentações e em análises de dados.</p>
+<section id="countplot" class="level4">
+<h4 class="anchored" data-anchor-id="countplot"><code>countplot()</code></h4>
+<p>A primeira função que iremos aprender a utilizar é a função <code>countplot()</code>. Ela é indicada quando queremos realizar a contagem de uma categoria, ou seja, escolhemos um campo categórico em nossos dados e indicamos quantas ocorrências encontramos em nossos dados. Nos próximos blocos de código, veremos vários exemplos de como fazer isso.</p>
+<div id="cell-19" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># contando o número de pokemons por geração</span></span>
+<span id="cb5-2"></span>
+<span id="cb5-3">plot <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> sns.countplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Generation"</span>)</span>
+<span id="cb5-4"></span>
+<span id="cb5-5">plot</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Olha só, parece bem fácil, não? Está ali o nosso gráfico, com o número de pokemons por geração. No entanto, temos algumas melhorias que podem ser feitas:</p>
+<ul>
+<li>adicionar um título</li>
+<li>corrigir os títulos dos eixos.</li>
+</ul>
+<p>Para realizar esses ajustes, vamos precisar de uma nova biblioteca, chamada <code>matplotlib</code>. Na verdade, essa biblioteca é a base de muitas outras bibliotecas de visualização, tais como seaborn, plotly e por aí vai.</p>
+<p>Neste cenário, <code>matplotlib</code> é utilizada para preparar o que chamamos de área de plotagem, que é o retângulo branco onde nosso gráfico será exibido.</p>
+<div id="cell-21" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> matplotlib.pyplot <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> plt</span>
+<span id="cb6-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># contando o número de pokemons por geração</span></span>
+<span id="cb6-3"></span>
+<span id="cb6-4">sns.countplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Generation"</span>)</span>
+<span id="cb6-5">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pokemons por Geração'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># título do gráfico</span></span>
+<span id="cb6-6">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># eixo X</span></span>
+<span id="cb6-7">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Número de Pokemons'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># eixo Y</span></span>
+<span id="cb6-8"></span>
+<span id="cb6-9">plt.show() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mostra o gráfico</span></span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Agora sim, temos um gráfico bem desenhado!</p>
+<p>Este gráfico é um <strong>Gráfico de Colunas</strong>, de acordo com as definições, pois as barras são verticais. Para transformar em um gráfico de barras, na função <code>countplot()</code> precisamos apenas trocar o x pelo y no segundo parâmetro, além de trocar os títulos na funções xlabel e ylabel. Vamos ver como fica:</p>
+<div id="cell-23" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1">sns.countplot(pokemons, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Generation"</span>)</span>
+<span id="cb7-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Pokemons por Geração'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># título do gráfico</span></span>
+<span id="cb7-3">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># eixo Y</span></span>
+<span id="cb7-4">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Número de Pokemons'</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># eixo X</span></span>
+<span id="cb7-5"></span>
+<span id="cb7-6">plt.show() <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># mostra o gráfico</span></span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="barplot" class="level4">
+<h4 class="anchored" data-anchor-id="barplot"><code>barplot()</code></h4>
+<p>Nos gráficos utilizando <code>countplot()</code> podemos apenas exibir a contagem de elementos para cada valor categórico da coluna que escolhemos. Não temos como, por exemplo, apresentar a média dos pontos de vida dos pokemons. Para isso, precisamos de mais controle sobre os dados que iremos mostrar. Entra em cena a função <code>barplot()</code>:</p>
+<div id="cell-26" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">import</span> numpy <span class="im" style="color: #00769E;
+background-color: null;
+font-style: inherit;">as</span> np</span>
+<span id="cb8-2"></span>
+<span id="cb8-3">sns.barplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'HP'</span>, estimator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>np.mean)</span>
+<span id="cb8-4">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de vida de Pokemons por Geração'</span>)</span>
+<span id="cb8-5">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb8-6">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de vida'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>Text(0, 0.5, 'Média dos pontos de vida')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>E aí está o nosso gráfico. Algumas observações:</p>
+<ul>
+<li>Precisamos trazer mais uma biblioteca para o nosso script, a biblioteca numpy, para podermos especificar que nosso gráfico de barras iria calcular a média do campo especificado</li>
+<li>Além de definirmos o eixo X, definimos também o eixo Y e qual o tipo de cálculo a ser realizado</li>
+<li>Cada barra tem um risco preto. Esse risco se refere a margem de erro. Se você não quiser ver essa informação, apenas adicionamos mais um parâmetro a função e ela desaparece.</li>
+</ul>
+<div id="cell-28" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1">sns.barplot(pokemons, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'HP'</span>, estimator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>np.mean, errwidth<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>)</span>
+<span id="cb10-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de vida de Pokemons por Geração'</span>)</span>
+<span id="cb10-3">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb10-4">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de vida'</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_227049/3891424301.py:1: FutureWarning: 
+
+The `errwidth` parameter is deprecated. And will be removed in v0.15.0. Pass `err_kws={'linewidth': 0}` instead.
+
+  sns.barplot(pokemons, x='Generation', y='HP', estimator=np.mean, errwidth=0)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>Text(0, 0.5, 'Média dos pontos de vida')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-9-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>E aí está o nosso gráfico de colunas. Outra coisa que podemos explorar é ter mais de uma métrica sendo analisada pela categoria selecionada. Por exemplo, vamos analisar a média dos pontos de ataque e defesa através das gerações.</p>
+<div id="cell-30" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Precisamos fazer ajustes no conjunto de dados</span></span>
+<span id="cb13-2">pokemons_sb <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Att'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Def'</span>]] <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Primeiro selecionamos apenas as colunas que queremos trabalhar</span></span>
+<span id="cb13-3">tidy <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons_sb.melt(id_vars<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>).rename(columns<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">str</span>.title)</span>
+<span id="cb13-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A função melt()  recebe como parâmetro a coluna categórica e pega todas as colunas de métricas e transformam em uma </span></span>
+<span id="cb13-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># única coluna, em uma nova linha para cada coluna. Para identificar cada nova linha, outra coluna é adicionada, com</span></span>
+<span id="cb13-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># a descrição. Ou seja, realizamos uma transposição do nosso conjunto de dados.</span></span>
+<span id="cb13-7"></span>
+<span id="cb13-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Gráfico</span></span>
+<span id="cb13-9">sns.barplot(tidy, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, y<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Value'</span>, hue<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Variable'</span>, estimator<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>np.mean, err_kws<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>{<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"linewidth"</span>: <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>})</span>
+<span id="cb13-10">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa de Pokemons por Geração'</span>)</span>
+<span id="cb13-11">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb13-12">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa'</span>)</span>
+<span id="cb13-13">plt.legend()</span>
+<span id="cb13-14"></span>
+<span id="cb13-15">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>No código acima, a parte que faz a plotagem do gráfico continua a mesma, mas temos as duas linhas iniciais que servem para fazer um ajuste nos dados. Quanto mais complexo os gráficos que queremos plotar, mais necessário se torna entender como formatar os dados. Então, aprenda principalmente Pandas e SQL e mantenha todos os seus gráficos fáceis de plotar!</p>
+<p>Agora, vamos ver mais um subtipo de gráfico de barras ou colunas: o gráfico de colunas “stacked” ou empilhadas.</p>
+<div id="cell-32" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1">pokemons_gb <span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span> pokemons.groupby([<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>])[[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Att'</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Def'</span>]].mean()</span>
+<span id="cb14-2"></span>
+<span id="cb14-3">plt.bar(pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>], pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Att'</span>], color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'blue'</span>, edgecolor<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'white'</span>, width<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb14-4">plt.bar(pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>], pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Def'</span>], bottom<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>pokemons_gb[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Att'</span>], color<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'red'</span>, edgecolor<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'white'</span>, width<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>)</span>
+<span id="cb14-5">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa de Pokemons por Geração'</span>)</span>
+<span id="cb14-6">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb14-7">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa'</span>)</span>
+<span id="cb14-8"></span>
+<span id="cb14-9">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Nesta versão de stacked bar chart, como podemos perceber pelo código, foi necessária uma nova transformação nos dados, desta vez com as funções <code>groupby()</code> e <code>mean()</code>. Além disso, desenhamos as barras com o matplotlib direto, não chegamos a utilizar o seaborn.</p>
+<p>A transformação nos dados foi necessária para agruparmos os valores de ataque e defensa por geração e calcular a média. A opção de utilizar matplotlib direto produziu um gráfico com a aparência bem diferente, e sinceramente, feia se comparada aos outros gráficos que criamos. E existe uma alternativa! Podemos usar o seaborn através do próprio DataFrame, garantindo uma aparência alinhada com o que geramos anteriormente.</p>
+<div id="cell-35" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1">pokemons_gb.plot(kind<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'bar'</span>, x<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Generation'</span>, stacked<span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">True</span>)</span>
+<span id="cb15-2">plt.title(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa de Pokemons por Geração'</span>)</span>
+<span id="cb15-3">plt.xlabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Geração'</span>)</span>
+<span id="cb15-4">plt.ylabel(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'Média dos pontos de ataque e defesa'</span>)</span>
+<span id="cb15-5">plt.legend()</span>
+<span id="cb15-6"></span>
+<span id="cb15-7">plt.show()</span></code></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="https://blog.wvcode.com.br/posts/data-106/index_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="concluindo" class="level2">
+<h2 class="anchored" data-anchor-id="concluindo">Concluindo</h2>
+<p>Conseguimos ver como gerar um dos gráficos mais utilizados na área de Visualização de Dados, o gráfico de barras e suas variações utilizando a biblioteca seaborn. Também aprendemos que para gerar certos tipos de gráficos, é necessário fazer algumas transformações nos dados, o que conecta este artigo ao de Pandas.</p>
+<p>Se você quiser aprender mais sobre seaborn, seguem alguns links: - <a href="https://seaborn.pydata.org/introduction.html#introduction">Documentação oficial do Seaborn em português</a>: A documentação oficial do Seaborn tem uma versão em português que fornece uma visão geral da biblioteca, exemplos de uso, informações sobre os diferentes tipos de gráficos, e muito mais - <a href="https://towardsdatascience.com/data-visualization-with-python-and-seaborn-part-1-29c8d54a854f">Tutorial de visualização de dados com Python e Seaborn</a>: Este tutorial do Towards Data Science fornece uma introdução prática à visualização de dados com Seaborn, incluindo exemplos de código e gráficos. O tutorial abrange tópicos como gráficos de barras, gráficos de dispersão, heatmap e muito mais.</p>
+<p>Um abraço e até mais,</p>
+<p>Walter.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>Visualização</category>
+  <category>Python</category>
+  <category>Pandas</category>
+  <category>MatPlotLib</category>
+  <category>Seaborn</category>
+  <guid>https://blog.wvcode.com.br/posts/data-106/</guid>
+  <pubDate>Wed, 08 Feb 2023 00:00:00 GMT</pubDate>
+  <media:content url="https://blog.wvcode.com.br/library/concepts/programming_practice.jpg" medium="image" type="image/jpeg"/>
+</item>
+<item>
   <title>Parte 04 - Pandas</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
   <link>https://blog.wvcode.com.br/posts/data-105/</link>
