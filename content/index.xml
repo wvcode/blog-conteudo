@@ -1326,7 +1326,7 @@ font-style: inherit;">"Plote um gráfico de pizza totalizando pokemons pelo camp
   <media:content url="https://blog.wvcode.com.br/posts/p0002-pandasai/panda-001.png" medium="image" type="image/png" height="144" width="144"/>
 </item>
 <item>
-  <title>[VDP] Aula 10 - Seaborn - Melhorando seus Visuais</title>
+  <title>Parte 09 - Seaborn - Melhorando seus Visuais</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
   <link>https://blog.wvcode.com.br/posts/data-110/</link>
   <description><![CDATA[ 
@@ -3724,11 +3724,9 @@ font-style: inherit;">'Ano'</span>)</span>
 
  ]]></description>
   <category>Visualização</category>
-  <category>Python</category>
-  <category>Pandas</category>
   <category>Seaborn</category>
   <category>MatPlotLib</category>
-  <category>Boas Práticas</category>
+  <category>ptbr</category>
   <guid>https://blog.wvcode.com.br/posts/data-110/</guid>
   <pubDate>Sun, 12 Feb 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/library/concepts/programming_practice.jpg" medium="image" type="image/jpeg"/>
@@ -4417,9 +4415,9 @@ font-style: inherit;"># mostra o gráfico</span></span>
 
  ]]></description>
   <category>Visualização</category>
-  <category>Python</category>
   <category>Pandas</category>
   <category>Seaborn</category>
+  <category>ptbr</category>
   <guid>https://blog.wvcode.com.br/posts/data-108/</guid>
   <pubDate>Fri, 10 Feb 2023 00:00:00 GMT</pubDate>
   <media:content url="https://blog.wvcode.com.br/library/concepts/programming_practice.jpg" medium="image" type="image/jpeg"/>
