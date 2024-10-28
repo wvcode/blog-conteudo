@@ -165,14 +165,7 @@
     "href": "posts/data-107/index.html",
     "title": "Parte 06 - Linhas e Áreas",
     "section": "",
-    "text": "Olá Cientista de Dados!\nNa última aula, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.\nMais especificamente, aprendemos a criar gráficos de barras e suas variações como o gráfico de colunas, barras agrupadas ou até mesmo empilhadas (stacked). Esses gráficos correspondem com certeza à maior parte da nossa necessidade em termos de gráficos, mas ainda temos outra categoria que é muito importante: os gráficos de Linhas e Áreas.\n\n\nOs gráficos de Linhas e Áreas são utilizados quando precisamos representar a distribuição de métrica ao longo de um eixo de valores categóricos mas contínuos. O exemplo mais clássico é representar a distribuição de valores ao longo da dimensão do tempo. Mas também é possível utilizar qualquer outra dimensão numérica e contínua.\nEntão, estão preparados para mais uma dose de conhecimento?"
-  },
-  {
-    "objectID": "posts/data-107/index.html#introdução",
-    "href": "posts/data-107/index.html#introdução",
-    "title": "Parte 06 - Linhas e Áreas",
-    "section": "",
-    "text": "Olá Cientista de Dados!\nNa última aula, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.\nMais especificamente, aprendemos a criar gráficos de barras e suas variações como o gráfico de colunas, barras agrupadas ou até mesmo empilhadas (stacked). Esses gráficos correspondem com certeza à maior parte da nossa necessidade em termos de gráficos, mas ainda temos outra categoria que é muito importante: os gráficos de Linhas e Áreas.\n\n\nOs gráficos de Linhas e Áreas são utilizados quando precisamos representar a distribuição de métrica ao longo de um eixo de valores categóricos mas contínuos. O exemplo mais clássico é representar a distribuição de valores ao longo da dimensão do tempo. Mas também é possível utilizar qualquer outra dimensão numérica e contínua.\nEntão, estão preparados para mais uma dose de conhecimento?"
+    "text": "Olá Devs!\nNo artigo anterior, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.\nMais especificamente, aprendemos a criar gráficos de barras e suas variações como o gráfico de colunas, barras agrupadas ou até mesmo empilhadas (stacked). Esses gráficos correspondem com certeza à maior parte da nossa necessidade em termos de gráficos, mas ainda temos outra categoria que é muito importante: os gráficos de Linhas e Áreas."
   },
   {
     "objectID": "posts/data-107/index.html#preparação",
@@ -193,7 +186,7 @@
     "href": "posts/data-107/index.html#conclusão",
     "title": "Parte 06 - Linhas e Áreas",
     "section": "Conclusão",
-    "text": "Conclusão\nNesta aula, aprendemos a criar mais dois tipos de gráfico: linha e área, revisamos a utilização de pandas para transformar os dados e acrescentamos mais uma ferramenta no nosso cinto de utilidades.\nSe você quiser aprender mais sobre gráficos de linha e área em seaborn, seguem alguns links: - Documentação oficial do Seaborn em português: A documentação oficial do Seaborn tem uma versão em português que fornece uma visão geral da biblioteca, exemplos de uso, informações sobre os diferentes tipos de gráficos, e muito mais - Gráficos de Linha em Seaborn\nNa próxima aula, iremos explorar os gráficos de dispersão e pontos.\n\nNavegação\n\n\n\n&lt; Anterior\n|\nPróximo &gt;"
+    "text": "Conclusão\nNeste artigos, aprendemos a criar mais dois tipos de gráfico: linha e área, revisamos a utilização de pandas para transformar os dados e acrescentamos mais uma ferramenta no nosso cinto de utilidades.\nSe você quiser aprender mais sobre gráficos de linha e área em seaborn, seguem alguns links: - Documentação oficial do Seaborn em português: A documentação oficial do Seaborn tem uma versão em português que fornece uma visão geral da biblioteca, exemplos de uso, informações sobre os diferentes tipos de gráficos, e muito mais - Gráficos de Linha em Seaborn\nUm abraço e até a próxima,\nWalter."
   },
   {
     "objectID": "posts/p0002-pandasai/index.html",

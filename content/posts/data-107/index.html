@@ -210,16 +210,10 @@ background-size: cover;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introdução" id="toc-introdução" class="nav-link active" data-scroll-target="#introdução">Introdução</a>
-  <ul class="collapse">
-  <li><a href="#gráficos-de-linhas-e-áreas" id="toc-gráficos-de-linhas-e-áreas" class="nav-link" data-scroll-target="#gráficos-de-linhas-e-áreas">Gráficos de Linhas e Áreas</a></li>
-  </ul></li>
+  <li><a href="#gráficos-de-linhas-e-áreas" id="toc-gráficos-de-linhas-e-áreas" class="nav-link active" data-scroll-target="#gráficos-de-linhas-e-áreas">Gráficos de Linhas e Áreas</a></li>
   <li><a href="#preparação" id="toc-preparação" class="nav-link" data-scroll-target="#preparação">Preparação</a></li>
   <li><a href="#utilização-básica" id="toc-utilização-básica" class="nav-link" data-scroll-target="#utilização-básica">Utilização Básica</a></li>
-  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a>
-  <ul class="collapse">
-  <li><a href="#navegação" id="toc-navegação" class="nav-link" data-scroll-target="#navegação">Navegação</a></li>
-  </ul></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
   </ul>
 </nav>
     </div>
@@ -230,21 +224,18 @@ background-size: cover;
 
 
 
-<section id="introdução" class="level2">
-<h2 class="anchored" data-anchor-id="introdução">Introdução</h2>
-<p>Olá Cientista de Dados!</p>
-<p>Na última aula, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.</p>
+<p>Olá Devs!</p>
+<p>No artigo anterior, começamos de maneira efetiva o nosso aprendizado da biblioteca seaborn, para a criação de gráficos utilizando a linguagem Python, e tecnologias interativas como o Google Colab.</p>
 <p>Mais especificamente, aprendemos a criar gráficos de barras e suas variações como o gráfico de colunas, barras agrupadas ou até mesmo empilhadas (stacked). Esses gráficos correspondem com certeza à maior parte da nossa necessidade em termos de gráficos, mas ainda temos outra categoria que é muito importante: os gráficos de Linhas e Áreas.</p>
 <section id="gráficos-de-linhas-e-áreas" class="level3">
 <h3 class="anchored" data-anchor-id="gráficos-de-linhas-e-áreas">Gráficos de Linhas e Áreas</h3>
 <p>Os gráficos de Linhas e Áreas são utilizados quando precisamos representar a distribuição de métrica ao longo de um eixo de valores categóricos mas contínuos. O exemplo mais clássico é representar a distribuição de valores ao longo da dimensão do tempo. Mas também é possível utilizar qualquer outra dimensão numérica e contínua.</p>
 <p>Então, estão preparados para mais uma dose de conhecimento?</p>
 </section>
-</section>
 <section id="preparação" class="level2">
 <h2 class="anchored" data-anchor-id="preparação">Preparação</h2>
 <p>A primeira coisa que iremos fazer no nosso notebook é carregar todas as bibliotecas que iremos utilizar e também o nosso conjunto de dados.</p>
-<div id="cell-5" class="cell" data-execution_count="1">
+<div id="cell-4" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -256,7 +247,7 @@ background-size: cover;
 <h2 class="anchored" data-anchor-id="utilização-básica">Utilização Básica</h2>
 <p>A utilização básica aqui não é muito diferente do que fizemos para os gráficos de barra: temos uma função que deve poder gerar a visualização, através da passagem de alguns parâmetros básicos: fonte de dados, eixo X, Y, …</p>
 <p>Neste caso, a função em questão é a <code>lineplot()</code>. Vamos tentar?</p>
-<div id="cell-8" class="cell" data-execution_count="6">
+<div id="cell-7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(pokemons, x<span class="op">=</span><span class="st">'Generation'</span>, y<span class="op">=</span><span class="st">'Spe'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Variação de Velocidade de acordo com as Gerações'</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Geração'</span>)</span>
@@ -272,7 +263,7 @@ background-size: cover;
 </div>
 <p>Padronização é uma maravilha, não é mesmo? Pegamos o nosso código para gráficos de barras e trocamos a função e tudo funcionou! Podemos perceber, no entanto, que a nossa linha representando está envolta por um delimitador azulado. Para resolver isso, vamos dar uma analisada nos parâmetros específicos da função <code>lineplot()</code>.</p>
 <p>Por padrão, o gráfico de linhas também plota o que chamamos de error band, ou margem de erro. Se não for interessante, podemos eliminar essa error band.</p>
-<div id="cell-10" class="cell" data-execution_count="7">
+<div id="cell-9" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>sns.lineplot(pokemons, x<span class="op">=</span><span class="st">'Generation'</span>, y<span class="op">=</span><span class="st">'Spe'</span>, errorbar<span class="op">=</span><span class="va">None</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Variação de Velocidade de acordo com as Gerações'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Geração'</span>)</span>
@@ -287,7 +278,7 @@ background-size: cover;
 </div>
 </div>
 <p>E, assim como no gráfico de barras, temos a necessidade de plotar mais de uma série no nosso gráfico de linhas. Como fazemos isso? É simples:</p>
-<div id="cell-12" class="cell" data-execution_count="16">
+<div id="cell-11" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pokemons_sb <span class="op">=</span> pokemons[[<span class="st">'Generation'</span>,<span class="st">'Spa'</span>,<span class="st">'Spd'</span>]] <span class="co"># Primeiro selecionamos apenas as colunas que queremos trabalhar</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tidy <span class="op">=</span> pokemons_sb.melt(id_vars<span class="op">=</span><span class="st">'Generation'</span>).rename(columns<span class="op">=</span><span class="bu">str</span>.title)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -306,7 +297,7 @@ background-size: cover;
 </div>
 <p>Basicamente, tivemos que fazer a mesma operação que fizemos para as múltiplas barras. E o resto do código já é bem conhecido.</p>
 <p>O outro tipo de gráfico baseado em linhas é o popular gráfico de área. Mas somente conseguimos gerar esse gráfico utilizando a função <code>stackplot()</code> do MatplotLib. Veja o exemplo abaixo:</p>
-<div id="cell-15" class="cell" data-execution_count="28">
+<div id="cell-14" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pokemons_gb <span class="op">=</span> pokemons.groupby([<span class="st">'Generation'</span>])[[<span class="st">'Spa'</span>, <span class="st">'Spd'</span>]].mean().reset_index()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>plt.stackplot(pokemons_gb[<span class="st">'Generation'</span>], pokemons_gb[<span class="st">'Spa'</span>], pokemons_gb[<span class="st">'Spd'</span>], labels<span class="op">=</span>[<span class="st">'Special Attack'</span>, <span class="st">'Special Defense'</span>])</span>
@@ -326,24 +317,12 @@ background-size: cover;
 </section>
 <section id="conclusão" class="level2">
 <h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
-<p>Nesta aula, aprendemos a criar mais dois tipos de gráfico: linha e área, revisamos a utilização de pandas para transformar os dados e acrescentamos mais uma ferramenta no nosso cinto de utilidades.</p>
+<p>Neste artigos, aprendemos a criar mais dois tipos de gráfico: linha e área, revisamos a utilização de pandas para transformar os dados e acrescentamos mais uma ferramenta no nosso cinto de utilidades.</p>
 <p>Se você quiser aprender mais sobre gráficos de linha e área em seaborn, seguem alguns links: - <a href="https://seaborn.pydata.org/introduction.html#introduction">Documentação oficial do Seaborn em português</a>: A documentação oficial do Seaborn tem uma versão em português que fornece uma visão geral da biblioteca, exemplos de uso, informações sobre os diferentes tipos de gráficos, e muito mais - <a href="https://morioh.com/p/4eda0350366b">Gráficos de Linha em Seaborn</a></p>
-<p>Na próxima aula, iremos explorar os gráficos de dispersão e pontos.</p>
-<section id="navegação" class="level3">
-<h3 class="anchored" data-anchor-id="navegação">Navegação</h3>
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><a href="../../posts/data-106/index.html">&lt; Anterior</a></th>
-<th>|</th>
-<th style="text-align: right;"><a href="../../posts/data-108/index.html">Próximo &gt;</a></th>
-</tr>
-</thead>
-
-</table>
+<p>Um abraço e até a próxima,</p>
+<p>Walter.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
