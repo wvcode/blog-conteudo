@@ -10,7 +10,788 @@
 <atom:link href="https://blog.wvcode.com.br/index.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Mon, 28 Oct 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 11 Nov 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Parte 1: Introdução ao dbt</title>
+  <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
+  <link>https://blog.wvcode.com.br/posts/dbt-001/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="introdução" class="level1">
+<h1>Introdução</h1>
+<p>Considerando um cenário corporativo, a maior parte dos dados que um analista de dados tem para trabalhar já estão nos data warehouses, lake houses e afins, para que o mesmo esteja respeitando as políticas de data management e compliance. Mas o cenário se modifica quando vamos para empresas menores, que tem uma politica mais liberal de data management: é comum que os dados nos lakes precisem ser enriquecidos pelo próprio analista com arquivos de texto, planilhas, APIs ou até mesmo de páginas web enquanto tentam criar as visualizações.</p>
+<p>A partir do momento em que os dados estão disponíveis, o próximo passo é trabalha-los para que os mesmos atendam às necessidades do projeto. Nesta fase, a biblioteca <code>Pandas</code> é uma das mais utilizadas para manipulação de dados em Python. <code>Pandas</code> é uma biblioteca de código aberto que fornece estruturas de dados de alto desempenho e fáceis de usar, além de ferramentas de análise de dados. Se considerarmos um analista que não tem background em programação, <code>Pandas</code> é uma excelente opção para manipulação de dados.</p>
+<p>Para aqueles analistas com background em programação, apesar do poder que <code>Pandas</code> disponibiliza, sabemos que a maior parte das transformações de dados poderiam ser feitas de maneira mais tradicional e eficiente com o uso de <code>SQL</code>, que é a linguagem nativa dos bancos de dados relacionais e especializada para trabalhar com dados tabulares.</p>
+<p>Mas, devido a algumas limitações, usar <code>SQL</code> nesta tarefa acaba não sendo tão popular. Entre os problemas mais comuns estão:</p>
+<ul>
+<li>Os ambientes de desenvolvimento em SQL não tem integração nativa com ferramentas de source control, como Git</li>
+<li>Não é possível executar testes automatizados de maneira simples</li>
+<li>Não é possível reutilizar código de maneira eficiente.</li>
+</ul>
+<p>Para resolver esses problemas e outros relacionados a modelagem e transformação de dados, é que a ferramenta <code>dbt</code> foi criada.</p>
+<p>Nesta série de artigos, vamos explorar o <code>dbt</code> e como ele pode ser utilizado para transformar dados de maneira eficiente e escalável. Para isso, vamos criar um projeto de exemplo: um repositório de dados para ser utilizado em visualizações de dados em geral. Este projeto pode ser um bom ponto de partida para quem está começando a trabalhar com <code>dbt</code> e quer adicionar alfo prático ao seu portfolio.</p>
+</section>
+<section id="dbt-data-build-tool" class="level1">
+<h1>dbt (data build tool)</h1>
+<p>O <a href="https://www.getdbt.com/product/what-is-dbt">dbt</a> é uma ferramenta de transformação de dados que permite que você escreva transformações de dados em <code>SQL</code>, e que você possa executar essas transformações de maneira programática, testar e documentar essas transformações.</p>
+<p>O dbt vêm em duas versões: <code>dbt Core</code> e <code>dbt Cloud</code>. A versão <code>dbt Core</code> é a versão open source, que você pode instalar e rodar em sua máquina. A versão <code>dbt Cloud</code> é a versão paga, que roda na nuvem e que oferece funcionalidades adicionais, como agendamento de execuções, monitoramento de execuções, alertas, etc.</p>
+<p>Este artigo irá focar na versão <code>dbt Core</code>.</p>
+<section id="instalação" class="level2">
+<h2 class="anchored" data-anchor-id="instalação">Instalação</h2>
+<p>O dbt-core é uma ferramenta de linha de comando, e mais objetivamente, um pacote Python. Para instalar o dbt, você precisa ter o Python instalado em sua máquina. Para instalar o dbt, você pode usar o <code>pip</code>, o gerenciador de pacotes do Python. Para instalar o dbt, execute o seguinte comando:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install dbt</span></code></pre></div>
+<p>Após a instalação, você pode verificar se o dbt foi instalado corretamente executando o seguinte comando:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dbt</span> <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--version</span></span></code></pre></div>
+<p>A saída do comando acima deve ser algo como:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dbt</span> version: 0.21.0</span></code></pre></div>
+<p>A próxima etapa é baixar o driver de conexão com o banco de dados que você irá utilizar. O dbt suporta diversos bancos de dados, como <code>PostgreSQL</code>, <code>Redshift</code>, <code>BigQuery</code>, <code>Snowflake</code>, <code>SQL Server</code>, <code>MySQL</code>, <code>SQLite</code>, entre outros. O driver de conexão com o banco de dados que vamos utilizar aqui é do <code>PostgreSQL</code>, e você pode executar o seguinte comando para instala-lo:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">pip</span> install dbt-postgres</span></code></pre></div>
+</section>
+<section id="configuração" class="level2">
+<h2 class="anchored" data-anchor-id="configuração">Configuração</h2>
+<p>Agora que você já instalou o dbt e o driver de conexão com o banco de dados, o próximo passo é configurar o dbt para que ele possa se conectar ao seu banco de dados. Para isso, você precisa criar um arquivo chamado <code>profiles.yml</code>. Este arquivo pode estar localizado em dois locais:</p>
+<ul>
+<li>na pasta <code>~/.dbt/</code> no linux ou mac</li>
+<li>na pasta do projeto. –&gt; usaremos essa opção, para mantermos todos os arquivos em um único local.</li>
+</ul>
+<p>O arquivo <code>profiles.yml</code> é um arquivo de configuração que contém as informações de conexão com o banco de dados. Abaixo está um exemplo de um arquivo <code>profiles.yml</code>:</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">default</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb5-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">outputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb5-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dev</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb5-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> postgres</span></span>
+<span id="cb5-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">host</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> localhost</span></span>
+<span id="cb5-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">user</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> myuser</span></span>
+<span id="cb5-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pass</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> mypass</span></span>
+<span id="cb5-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">port</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span></span>
+<span id="cb5-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbname</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> mydb</span></span>
+<span id="cb5-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> my_schema</span></span>
+<span id="cb5-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">threads</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb5-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">keepalives_idle</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb5-13"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> dev</span></span></code></pre></div>
+<p>Neste exemplo, temos um perfil chamado <code>dev</code> que se conecta a um banco de dados <code>PostgreSQL</code> local. Você pode adicionar quantos perfis quiser, e cada perfil pode se conectar a um banco de dados diferente.</p>
+<p>Outro fator importante é a questão de segurança. Você não deve armazenar informações sensíveis, como senhas, diretamente no arquivo <code>profiles.yml</code>. Para isso, você pode utilizar variáveis de ambiente. Por exemplo, você pode substituir o valor da chave <code>pass</code> por uma variável de ambiente chamada <code>DBT_PASS</code>:</p>
+<div class="sourceCode" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">default</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb6-2"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">outputs</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb6-3"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dev</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb6-4"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">type</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> postgres</span></span>
+<span id="cb6-5"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">host</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> localhost</span></span>
+<span id="cb6-6"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">user</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> myuser</span></span>
+<span id="cb6-7"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pass</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{{ env_var('DBT_PASS') }}"</span></span>
+<span id="cb6-8"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">port</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5432</span></span>
+<span id="cb6-9"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">dbname</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> mydb</span></span>
+<span id="cb6-10"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> my_schema</span></span>
+<span id="cb6-11"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">threads</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span></span>
+<span id="cb6-12"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">keepalives_idle</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span></span>
+<span id="cb6-13"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">target</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> dev</span></span></code></pre></div>
+<p>Dessa forma, você pode definir a variável de ambiente <code>DBT_PASS</code> no seu terminal antes de executar o dbt:</p>
+<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">export</span> <span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">DBT_PASS</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mypass</span></code></pre></div>
+<p>No Windows, você pode definir variáveis de ambiente da seguinte maneira:</p>
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><span class="bu" style="color: null;
+background-color: null;
+font-style: inherit;">set</span> DBT_PASS=mypass</span></code></pre></div>
+<p>Outra maneira de definir variáveis de ambiente é criar um arquivo <code>.env</code> na raiz do seu projeto e adicionar as variáveis de ambiente nele. O dbt irá ler automaticamente as variáveis de ambiente definidas no arquivo <code>.env</code>.</p>
+<p>Exemplo de arquivo <code>.env</code>:</p>
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><span class="va" style="color: #111111;
+background-color: null;
+font-style: inherit;">DBT_PASS</span><span class="op" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">=</span>mypass</span></code></pre></div>
+</section>
+<section id="inicializando-um-projeto-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="inicializando-um-projeto-dbt">Inicializando um projeto dbt</h2>
+<p>Para inicializar um projeto dbt, você pode executar o seguinte comando:</p>
+<div class="sourceCode" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dbt</span> init my_project</span></code></pre></div>
+<p>Este comando irá criar uma estrutura de pastas e arquivos para o seu projeto dbt. A estrutura de pastas e arquivos criada é a seguinte:</p>
+<pre class="text"><code>my_project/
+|-- analyses
+|-- macros
+|-- models
+|-- seeds
+|-- snapshots
+|-- tests
+|-- .env
+|-- .gitignore
+|-- dbt_project.yml
+|-- profiles.yml</code></pre>
+<p>Aqui está uma breve descrição de cada pasta e arquivo:</p>
+<ul>
+<li><code>analyses</code>: Pasta onde você pode escrever consultas SQL que serão executadas pelo dbt. As consultas nesta pasta são consultas ad-hoc, ou seja, consultas que você executa manualmente.</li>
+<li><code>macros</code>: Pasta onde você pode escrever macros, que são consultas SQL reutilizáveis.</li>
+<li><code>models</code>: Pasta onde você escreve as transformações de dados. Cada arquivo nesta pasta é um modelo dbt.</li>
+<li><code>seeds</code>: Pasta onde você pode colocar arquivos estáticos com dados de origem - por exemplo - lista de municipios, status, …</li>
+<li><code>snapshots</code>: Pasta onde você pode escrever consultas SQL que criam snapshots de tabelas.</li>
+<li><code>tests</code>: Pasta onde você pode escrever testes para os modelos dbt.</li>
+<li><code>.env</code>: Arquivo onde você pode definir variáveis de ambiente.</li>
+<li><code>.gitignore</code>: Arquivo que contém os arquivos e pastas que você deseja ignorar no Git.</li>
+<li><code>dbt_project.yml</code>: Arquivo de configuração do projeto dbt.</li>
+<li><code>profiles.yml</code>: Arquivo de configuração de conexão com o banco de dados.</li>
+</ul>
+</section>
+<section id="dbt_project.yml" class="level2">
+<h2 class="anchored" data-anchor-id="dbt_project.yml">dbt_project.yml</h2>
+<p>O arquivo <code>dbt_project.yml</code> é o arquivo de configuração do projeto dbt. Este arquivo contém informações sobre o projeto, como o nome do projeto, a versão do projeto, o diretório onde os modelos dbt estão localizados, etc. Aqui está um exemplo de um arquivo <code>dbt_project.yml</code>:</p>
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb12-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">name</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pipeline'</span></span>
+<span id="cb12-2"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">version</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'1.0.0'</span></span>
+<span id="cb12-3"></span>
+<span id="cb12-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># This setting configures which "profile" dbt uses for this project.</span></span>
+<span id="cb12-5"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">profile</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">'pipeline'</span></span>
+<span id="cb12-6"></span>
+<span id="cb12-7"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">model-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"models"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-8"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">analysis-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"analyses"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-9"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">test-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"tests"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-10"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seed-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"seeds"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-11"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">macro-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"macros"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-12"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">snapshot-paths</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">[</span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"snapshots"</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">]</span></span>
+<span id="cb12-13"></span>
+<span id="cb12-14"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">clean-targets</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">         # directories to be removed by `dbt clean`</span></span>
+<span id="cb12-15"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"target"</span></span>
+<span id="cb12-16"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">-</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dbt_packages"</span></span>
+<span id="cb12-17"></span>
+<span id="cb12-18"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">models</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-19"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">pipeline</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-20"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    # Config indicated by + and applies to all files under models/example/</span></span>
+<span id="cb12-21"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">bronze</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-22"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> bronze</span></span>
+<span id="cb12-23"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+materialized</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> table</span></span>
+<span id="cb12-24"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">silver</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-25"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> silver</span></span>
+<span id="cb12-26"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+materialized</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> table</span></span>
+<span id="cb12-27"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">gold</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-28"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> gold</span></span>
+<span id="cb12-29"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+materialized</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> table</span></span>
+<span id="cb12-30"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+post-hook</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> </span><span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"{{ grant_and_notify(this) }}"</span></span>
+<span id="cb12-31"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">    </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">src</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-32"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb12-33"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">      </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+materialized</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> table</span></span>
+<span id="cb12-34"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">seeds</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-35"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">src</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span></span>
+<span id="cb12-36"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+schema</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> src</span></span>
+<span id="cb12-37"><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">  </span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">+materialized</span><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">:</span><span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;"> seed</span></span></code></pre></div>
+<p>Neste exemplo, temos um projeto chamado <code>pipeline</code> com três modelos: <code>bronze</code>, <code>silver</code> e <code>gold</code>. Cada modelo tem um esquema associado e um tipo de materialização. O tipo de materialização pode ser <code>table</code>, <code>view</code> ou <code>incremental</code>. O tipo de materialização <code>table</code> é o tipo de materialização padrão, e é usado para criar tabelas a partir de consultas SQL. O tipo de materialização <code>view</code> é usado para criar visualizações a partir de consultas SQL. O tipo de materialização <code>incremental</code> é usado para criar tabelas incrementais a partir de consultas SQL.</p>
+<p>Este arquivo tem mais itens que são bem interessantes de aprender, e ao longo desta série de artigos, vamos voltar e abordar cada um deles.</p>
+</section>
+<section id="escrita-de-modelos-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="escrita-de-modelos-dbt">Escrita de modelos dbt</h2>
+<p>Vamos ao ponto principal do dbt: a escrita de modelos dbt. Um modelo dbt é um arquivo <code>.sql</code> que contém uma consulta SQL que transforma os dados. Aqui está um exemplo de um modelo dbt:</p>
+<div class="sourceCode" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-- bronze/my_model.sql</span></span>
+<span id="cb13-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">with</span> my_cte <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">as</span> (</span>
+<span id="cb13-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">select</span></span>
+<span id="cb13-4">        column1,</span>
+<span id="cb13-5">        column2</span>
+<span id="cb13-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">from</span></span>
+<span id="cb13-7">        my_table</span>
+<span id="cb13-8">)</span>
+<span id="cb13-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">select</span></span>
+<span id="cb13-10">    column1,</span>
+<span id="cb13-11">    column2</span>
+<span id="cb13-12"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">from</span></span>
+<span id="cb13-13">    my_cte</span></code></pre></div>
+<p>Este modelo dbt é um modelo <code>table</code>, que cria uma tabela chamada <code>my_model</code> no esquema <code>bronze</code>. O modelo dbt contém uma consulta SQL que seleciona as colunas <code>column1</code> e <code>column2</code> da tabela <code>my_table</code> e as insere na tabela <code>my_model</code>.</p>
+</section>
+<section id="executando-o-dbt" class="level2">
+<h2 class="anchored" data-anchor-id="executando-o-dbt">Executando o dbt</h2>
+<p>Agore que você já tem um projeto dbt configurado e um modelo dbt escrito, você pode executar o dbt para criar as tabelas no banco de dados. Para executar o dbt, você pode usar o seguinte comando:</p>
+<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dbt</span> run</span></code></pre></div>
+<p>Este comando irá executar todos os modelos dbt no diretório <code>models</code> e criar as tabelas no banco de dados. Se você quiser executar um modelo dbt específico, você pode usar o seguinte comando:</p>
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><span class="ex" style="color: null;
+background-color: null;
+font-style: inherit;">dbt</span> run <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">--models</span> my_model</span></code></pre></div>
+<p>Este comando irá executar apenas o modelo <code>my_model</code>.</p>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>Neste artigo, você aprendeu o que é o dbt, como instalar o dbt, como configurar o dbt, como inicializar um projeto dbt, como escrever modelos dbt e como executar o dbt. Nos próximos artigos, vamos falar em maiores detalhes sobre as funcionalidades e começar efetivamente a criar o nosso repositório de dados.</p>
+
+
+</section>
+</section>
+
+ ]]></description>
+  <category>PostgreSQL</category>
+  <category>dbt</category>
+  <category>portfolio</category>
+  <category>databases</category>
+  <guid>https://blog.wvcode.com.br/posts/dbt-001/</guid>
+  <pubDate>Mon, 11 Nov 2024 00:00:00 GMT</pubDate>
+  <media:content url="https://blog.wvcode.com.br/library/concepts/programming_practice.jpg" medium="image" type="image/jpeg"/>
+</item>
 <item>
   <title>Teste em Dados - Básico</title>
   <dc:creator>Walter R. Paixão-Côrtes</dc:creator>
@@ -1395,16 +2176,16 @@ font-style: inherit;">'Category'</span>].unique().tolist()</span></code></pre></
 </div>
 </div>
 <p>Temos um No Category ali que está fazendo o teste falhar. Vamos corrigir isso. Mas qual seria a melhor correção? Trocar o valor por um dos válidos ou corrigir o teste? A resposta dependerá do contexto do negócio. Aqui, vamos assumir que corrigir o teste é a melhor alternativa.</p>
-<div id="cell-78" class="cell" data-execution_count="29">
+<div id="cell-78" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">def</span> run_unit_test(data_frame):</span>
-<span id="cb44-2">    <span class="cf" style="color: #003B4F;
+<span id="cb44-2">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">try</span>:</span>
-<span id="cb44-3">        <span class="cf" style="color: #003B4F;
+<span id="cb44-3">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">assert</span> teste_nulos(data_frame) <span class="op" style="color: #5E5E5E;
@@ -1414,21 +2195,19 @@ background-color: null;
 font-style: inherit;">False</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Existem valores nulos"</span></span>
-<span id="cb44-4">        <span class="cf" style="color: #003B4F;
+<span id="cb44-4">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">assert</span> (</span>
-<span id="cb44-5">            teste_nulos(data_frame, <span class="st" style="color: #20794D;
+font-style: inherit;">assert</span> (teste_nulos(data_frame, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Name"</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">False</span></span>
-<span id="cb44-6">        ), <span class="st" style="color: #20794D;
+font-style: inherit;">False</span>), <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Existem valores nulos na coluna Name"</span></span>
-<span id="cb44-7">        <span class="cf" style="color: #003B4F;
+<span id="cb44-5">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">assert</span> teste_eh_numero(data_frame, <span class="st" style="color: #20794D;
@@ -1436,7 +2215,7 @@ background-color: null;
 font-style: inherit;">"Age"</span>), <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"A coluna Age não é do tipo numérico"</span></span>
-<span id="cb44-8">        <span class="cf" style="color: #003B4F;
+<span id="cb44-6">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">assert</span> teste_vazio(data_frame) <span class="op" style="color: #5E5E5E;
@@ -1446,26 +2225,22 @@ background-color: null;
 font-style: inherit;">False</span>, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"O data_frame está vazio"</span></span>
-<span id="cb44-9">        <span class="cf" style="color: #003B4F;
+<span id="cb44-7">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">assert</span> (</span>
-<span id="cb44-10">            teste_condicional(data_frame, <span class="st" style="color: #20794D;
+font-style: inherit;">assert</span> (teste_condicional(data_frame, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Age &lt; 40"</span>) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">True</span></span>
-<span id="cb44-11">        ), <span class="st" style="color: #20794D;
+font-style: inherit;">True</span>), <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Não tem menores de quarenta"</span></span>
-<span id="cb44-12">        <span class="cf" style="color: #003B4F;
+<span id="cb44-8">    <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">assert</span> (</span>
-<span id="cb44-13">            teste_valores(</span>
-<span id="cb44-14">                data_frame, <span class="st" style="color: #20794D;
+font-style: inherit;">assert</span> (teste_valores(data_frame, <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Category"</span>, [<span class="st" style="color: #20794D;
 background-color: null;
@@ -1475,22 +2250,19 @@ font-style: inherit;">"Category B"</span>, <span class="st" style="color: #20794
 background-color: null;
 font-style: inherit;">"Category C"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"No Category"</span>]</span>
-<span id="cb44-15">            )</span>
-<span id="cb44-16">            <span class="op" style="color: #5E5E5E;
+font-style: inherit;">"No Category"</span>]) <span class="op" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">==</span> <span class="va" style="color: #111111;
 background-color: null;
-font-style: inherit;">True</span></span>
-<span id="cb44-17">        ), <span class="st" style="color: #20794D;
+font-style: inherit;">True</span>), <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Categoria Invalida"</span></span>
-<span id="cb44-18">        <span class="bu" style="color: null;
+<span id="cb44-9">    <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Testes finalizados com sucesso."</span>)</span>
-<span id="cb44-19">    <span class="cf" style="color: #003B4F;
+<span id="cb44-10">  <span class="cf" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">except</span> <span class="pp" style="color: #AD0000;
@@ -1498,7 +2270,7 @@ background-color: null;
 font-style: inherit;">AssertionError</span> <span class="im" style="color: #00769E;
 background-color: null;
 font-style: inherit;">as</span> e:</span>
-<span id="cb44-20">        <span class="bu" style="color: null;
+<span id="cb44-11">    <span class="bu" style="color: null;
 background-color: null;
 font-style: inherit;">print</span>(e)</span></code></pre></div>
 </div>

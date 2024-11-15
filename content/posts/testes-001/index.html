@@ -1047,27 +1047,18 @@ memory usage: 2.9+ KB</code></pre>
 </div>
 </div>
 <p>Temos um No Category ali que está fazendo o teste falhar. Vamos corrigir isso. Mas qual seria a melhor correção? Trocar o valor por um dos válidos ou corrigir o teste? A resposta dependerá do contexto do negócio. Aqui, vamos assumir que corrigir o teste é a melhor alternativa.</p>
-<div id="cell-78" class="cell" data-execution_count="29">
+<div id="cell-78" class="cell" data-execution_count="31">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_unit_test(data_frame):</span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> teste_nulos(data_frame) <span class="op">==</span> <span class="va">False</span>, <span class="st">"Existem valores nulos"</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (</span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>            teste_nulos(data_frame, <span class="st">"Name"</span>) <span class="op">==</span> <span class="va">False</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>        ), <span class="st">"Existem valores nulos na coluna Name"</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> teste_eh_numero(data_frame, <span class="st">"Age"</span>), <span class="st">"A coluna Age não é do tipo numérico"</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> teste_vazio(data_frame) <span class="op">==</span> <span class="va">False</span>, <span class="st">"O data_frame está vazio"</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (</span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>            teste_condicional(data_frame, <span class="st">"Age &lt; 40"</span>) <span class="op">==</span> <span class="va">True</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>        ), <span class="st">"Não tem menores de quarenta"</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">assert</span> (</span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>            teste_valores(</span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a>                data_frame, <span class="st">"Category"</span>, [<span class="st">"Category A"</span>, <span class="st">"Category B"</span>, <span class="st">"Category C"</span>, <span class="st">"No Category"</span>]</span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>            )</span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a>            <span class="op">==</span> <span class="va">True</span></span>
-<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a>        ), <span class="st">"Categoria Invalida"</span></span>
-<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Testes finalizados com sucesso."</span>)</span>
-<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">AssertionError</span> <span class="im">as</span> e:</span>
-<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">try</span>:</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> teste_nulos(data_frame) <span class="op">==</span> <span class="va">False</span>, <span class="st">"Existem valores nulos"</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> (teste_nulos(data_frame, <span class="st">"Name"</span>) <span class="op">==</span> <span class="va">False</span>), <span class="st">"Existem valores nulos na coluna Name"</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> teste_eh_numero(data_frame, <span class="st">"Age"</span>), <span class="st">"A coluna Age não é do tipo numérico"</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> teste_vazio(data_frame) <span class="op">==</span> <span class="va">False</span>, <span class="st">"O data_frame está vazio"</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> (teste_condicional(data_frame, <span class="st">"Age &lt; 40"</span>) <span class="op">==</span> <span class="va">True</span>), <span class="st">"Não tem menores de quarenta"</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> (teste_valores(data_frame, <span class="st">"Category"</span>, [<span class="st">"Category A"</span>, <span class="st">"Category B"</span>, <span class="st">"Category C"</span>, <span class="st">"No Category"</span>]) <span class="op">==</span> <span class="va">True</span>), <span class="st">"Categoria Invalida"</span></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Testes finalizados com sucesso."</span>)</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">except</span> <span class="pp">AssertionError</span> <span class="im">as</span> e:</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-execução-3" class="level4">

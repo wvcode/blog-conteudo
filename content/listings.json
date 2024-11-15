@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/dbt-001/index.html",
       "/posts/testes-001/index.html",
       "/posts/p0004-classif-texto/index.html",
       "/posts/p0003-powerbiclient/index.html",
